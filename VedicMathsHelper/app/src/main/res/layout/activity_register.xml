@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_radial">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="top">
+
+        <LinearLayout
+            android:id="@+id/heroContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="88dp"
+            android:paddingBottom="32dp"
+            android:layout_marginStart="12dp"
+            android:alpha="0"
+            android:translationY="-20dp">
+
+            <TextView
+                android:id="@+id/beginJourney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Begin Your Journey"
+                android:textSize="32sp"
+                android:fontFamily="@font/samarkan"
+                android:letterSpacing="0.08"
+                android:textColor="@color/text_primary" />
+
+            <TextView
+                android:id="@+id/beginjournersub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create your Vedic Maths account"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginTop="8dp"
+                android:alpha="0.85" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/formContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:translationY="40dp">
+
+            <EditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:background="@drawable/input_bg"
+                android:padding="14dp"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:background="@drawable/input_bg"
+                android:padding="14dp"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/confirmPasswordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:background="@drawable/input_bg"
+                android:padding="14dp"
+                android:layout_marginBottom="24dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/registerBtn"
+                style="@style/PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Account" />
+
+            <TextView
+                android:id="@+id/loginLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Already have an account? Log in"
+                android:textColor="@color/saffron"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_medium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/babaView"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
+        android:src="@drawable/baba_peek"
+        android:contentDescription="Baba"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="-160dp"
+        android:layout_marginBottom="-10dp"
+        android:alpha="0.9" />
+
+</FrameLayout>
