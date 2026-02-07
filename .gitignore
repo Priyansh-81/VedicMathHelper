@@ -1,0 +1,18 @@
+# Firebase
+google-services.json
+app/google-services.json
+
+# Local config
+local.properties
+
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+
+# OS files
+.DS_Store

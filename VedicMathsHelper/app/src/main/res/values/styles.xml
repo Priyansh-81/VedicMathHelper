@@ -10,4 +10,76 @@
         <item name="elevation">0dp</item>
     </style>
 
+    <style name="OutlineButton_saffron" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/saffron</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/saffron</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="OutlineButton_Mred" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="strokeColor">@color/muted_red</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:textColor">@color/muted_red</item>
+        <item name="fontFamily">@font/poppins_medium</item>
+        <item name="elevation">0dp</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="FillBtnMred" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/muted_red</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="VedicDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="backgroundTint">@color/bg_pastel</item>
+        <item name="colorPrimary">@color/saffron</item>
+        <item name="colorSecondary">@color/soft_green</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+    </style>
+
+    <style name="AccentButton" parent="Widget.Material3.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:background">@drawable/btn_accent</item>
+        <item name="android:elevation">6dp</item>
+    </style>
+    <style name="VedicSwitch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="trackTint">@color/switch_track_on</item>
+        <item name="thumbTint">@color/switch_thumb_on</item>
+    </style>
+
+    <style name="SutraBubble" parent="Widget.Material3.Button">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="backgroundTint">@color/soft_saffron</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="cornerRadius">32dp</item>
+        <item name="elevation">6dp</item>
+        <item name="strokeColor">@color/saffron</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+    </style>
+
+
+    <style name="SutraBubbleLarge" parent="Widget.Material3.Button">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">80dp</item>
+        <item name="backgroundTint">@color/saffron</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">40dp</item>
+        <item name="elevation">10dp</item>
+        <item name="strokeColor">@color/text_primary</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="android:insetTop">2dp</item>
+        <item name="android:insetBottom">2dp</item>
+    </style>
 </resources>

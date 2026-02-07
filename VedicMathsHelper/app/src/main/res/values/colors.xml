@@ -10,4 +10,10 @@
     <color name="text_primary">#2E2E2E</color>
     <color name="text_secondary">#6B6B6B</color>
     <color name="color">#FFF3D6</color>
+    <color name="temple_maroon">#7A1F1F</color>
+    <color name="temple_maroon_dark">#541414</color>
+    <color name="switch_track_on">#FFD180</color>      <!-- soft saffron -->
+    <color name="switch_thumb_on">#FF8F00</color>      <!-- deep saffron -->
+    <color name="switch_track_off">#E0E0E0</color>
+    <color name="switch_thumb_off">#9E9E9E</color>
 </resources>

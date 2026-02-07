@@ -1,38 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="24dp">
+    android:background="@drawable/home_screen_bg"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/userInfoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Loading..."
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Welcome to Vedic Math Tutor"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="24dp" />
-
-    <Button
-        android:id="@+id/careerBtn"
+    <View
+        android:id="@+id/sunRays"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Career Mode"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/sun_rays_overlay"
+        android:alpha="0.25" />
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
+    <LinearLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/userInfoText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="XP: 0 • Streak: 0"
+                android:textSize="16sp"
+                android:textColor="@color/text_secondary" />
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/profile"
+                android:contentDescription="Profile"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="6dp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/homeBaba"
+            android:layout_width="480dp"
+            android:layout_height="480dp"
+            android:layout_gravity="center"
+            android:src="@drawable/baba_home_screen"
+            android:contentDescription="Home Baba"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"
+            android:alpha="0"
+            android:translationY="60dp"/>
+
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vedic Math"
+            android:layout_gravity="center"
+            android:fontFamily="@font/samarkan"
+            android:textSize="48sp"
+            android:alpha="0"
+            android:translationY="60dp"
+            android:layout_marginTop="-70dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/careerBtn"
+            style="@style/AccentButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Continue Journey"
+            android:layout_marginBottom="16dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/challengeBtn"
+            style="@style/AccentButton"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Challenge"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+
+</FrameLayout>

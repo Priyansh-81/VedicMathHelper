@@ -64,6 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                 .start();
 
         registerBtn.setOnClickListener(v -> {
+            performHaptic(v);
+            performSound(v);
             String email = emailInput.getText().toString().trim();
             String password = passwordInput.getText().toString().trim();
             String confirmPassword = confirmPasswordInput.getText().toString().trim();
@@ -135,6 +137,18 @@ public class RegisterActivity extends AppCompatActivity {
             InputMethodManager imm =
                     (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+    private void performHaptic(View view) {
+        if (AppSettings.isHapticsEnabled(this)) {
+            view.performHapticFeedback(
+                    android.view.HapticFeedbackConstants.KEYBOARD_TAP
+            );
+        }
+    }
+    private void performSound(View view) {
+        if (AppSettings.isSoundEnabled(this)) {
+            SoundManager.playButtonClick();
         }
     }
 }

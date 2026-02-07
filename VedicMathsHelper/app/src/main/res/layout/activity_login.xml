@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_radial">
 
-    <!-- MAIN CONTENT -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +12,6 @@
         android:padding="24dp"
         android:gravity="top">
 
-        <!-- HERO -->
         <LinearLayout
             android:id="@+id/heroContainer"
             android:layout_width="match_parent"
