@@ -16,4 +16,5 @@
     <color name="switch_thumb_on">#FF8F00</color>      <!-- deep saffron -->
     <color name="switch_track_off">#E0E0E0</color>
     <color name="switch_thumb_off">#9E9E9E</color>
+    <color name="combo_glow">#FFE082</color>
 </resources>

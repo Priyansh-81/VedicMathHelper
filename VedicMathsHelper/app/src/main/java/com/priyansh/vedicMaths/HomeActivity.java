@@ -79,7 +79,7 @@ public class HomeActivity extends AppCompatActivity {
                             long xp = (xpObj != null) ? xpObj : 0;
                             long streak = (streakObj != null) ? streakObj : 0;
 
-                            userInfoText.setText("XP: " + xp + " • Streak: " + streak);
+                            userInfoText.setText("XP: " + xp + " • Best Streak: " + streak);
                         }
                     });
         }
@@ -155,6 +155,7 @@ public class HomeActivity extends AppCompatActivity {
             animatePress(v);
             performHaptic(v);
             performSound(v);
+            startActivity(new Intent(this,ChallengeActivity.class));
         });
     }
 

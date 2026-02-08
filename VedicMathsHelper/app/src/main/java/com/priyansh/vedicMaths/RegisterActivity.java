@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
                             HashMap<String, Object> userProfile = new HashMap<>();
                             userProfile.put("email", user.getEmail());
                             userProfile.put("xp", 0);
-                            userProfile.put("streak", 1);
+                            userProfile.put("streak", 0);
                             userProfile.put("currentSutra", 1);
                             userProfile.put("createdAt", System.currentTimeMillis());
 

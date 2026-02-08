@@ -94,7 +94,7 @@ public class ProfileActivity extends AppCompatActivity {
                             Long streak = documentSnapshot.getLong("streak");
 
                             xpText.setText("XP: " + (xp != null ? xp : 0));
-                            streakText.setText("Streak: " + (streak != null ? streak : 0) + " days");
+                            streakText.setText("Best Streak: " + (streak != null ? streak : 0));
                         }
                     });
         }
