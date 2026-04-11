@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_radial"
+    android:background="@drawable/home_screen_bg"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -12,16 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        app:title="Profile"
         app:titleTextColor="@color/text_primary"
         app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
         app:navigationIconTint="@color/text_primary"
-        android:paddingHorizontal="8dp"
-        android:layout_marginTop="16dp"/>
+        android:paddingHorizontal="8dp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,51 +30,67 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/baba_profile_screen"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:contentDescription="baba"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#F2FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:src="@drawable/baba_profile_screen"
+                        android:contentDescription="Profile Picture"/>
+
+                    <TextView
+                        android:id="@+id/emailText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="user@email.com"
+                        android:textSize="18sp"
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:layout_marginTop="12dp"/>
+
+                    <TextView
+                        android:id="@+id/xpText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="XP: 0"
+                        android:textSize="15sp"
+                        android:textColor="@color/saffron"
+                        android:fontFamily="@font/poppins_medium"
+                        android:layout_marginTop="4dp" />
+
+                    <TextView
+                        android:id="@+id/streakText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Streak: 0 days"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_secondary"
+                        android:fontFamily="@font/poppins_regular"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/emailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="user@email.com"
-                android:textSize="18sp"
+                android:text="Settings"
+                android:textSize="16sp"
                 android:textColor="@color/text_primary"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"/>
-
-            <TextView
-                android:id="@+id/xpText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="XP: 0"
-                android:textSize="16sp"
-                android:textColor="@color/text_secondary"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp" />
-
-            <TextView
-                android:id="@+id/streakText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Streak: 0 days"
-                android:textSize="16sp"
-                android:textColor="@color/text_secondary"
-                android:layout_gravity="center"
-                android:layout_marginBottom="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preferences"
-                android:textSize="16sp"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="16dp" />
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="32dp" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -81,7 +98,7 @@
                 android:layout_marginTop="12dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/soft_green">
+                app:cardBackgroundColor="#F2FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -96,13 +113,13 @@
                         android:layout_height="wrap_content"
                         android:text="Haptic Feedback"
                         android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:fontFamily="@font/poppins_medium" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="10dp"
-                        android:background="#22000000"/>
+                        android:background="#11000000"/>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/musicSwitch"
@@ -111,21 +128,22 @@
                         android:layout_height="wrap_content"
                         android:text="Background Music"
                         android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:fontFamily="@font/poppins_medium" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginVertical="10dp"
-                        android:background="#22000000"/>
+                        android:background="#11000000"/>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/soundSwitch"
                         style="@style/VedicSwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sound Feedback"
+                        android:text="Sound Effects"
                         android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:fontFamily="@font/poppins_medium" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -136,32 +154,33 @@
                 android:text="Account"
                 android:textSize="16sp"
                 android:textColor="@color/text_primary"
+                android:fontFamily="@font/poppins_semibold"
                 android:layout_marginTop="32dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/changePasswordBtn"
                 style="@style/OutlineButton_saffron"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Change Password"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="12dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutBtn"
                 style="@style/OutlineButton_Mred"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:layout_marginTop="8dp" />
+                android:layout_height="56dp"
+                android:text="Log Out"
+                android:layout_marginTop="12dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteAccountBtn"
                 style="@style/FillBtnMred"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Delete Account"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp" />
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp" />
 
         </LinearLayout>
 

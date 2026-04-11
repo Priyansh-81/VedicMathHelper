@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class HomeActivity extends AppCompatActivity {
 
     TextView userInfoText, titleText;
-    ImageView profileBtn, homeBaba;
+    ImageView profileBtn, homeBaba, scannerBtn;
     MaterialButton careerBtn, challengeBtn;
 
     FrameLayout homeRoot;
@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         careerBtn = findViewById(R.id.careerBtn);
         challengeBtn = findViewById(R.id.challengeBtn);
         profileBtn = findViewById(R.id.profileIcon);
+        scannerBtn = findViewById(R.id.scannerBtn);
         homeBaba = findViewById(R.id.homeBaba);
         userInfoText = findViewById(R.id.userInfoText);
         titleText = findViewById(R.id.titleText);
@@ -142,6 +143,13 @@ public class HomeActivity extends AppCompatActivity {
             performSound(v);
             performHaptic(v);
             startActivity(new Intent(this, ProfileActivity.class));
+        });
+
+        scannerBtn.setOnClickListener(v -> {
+            animatePress(v);
+            performSound(v);
+            performHaptic(v);
+            startActivity(new Intent(this, ScannerActivity.class));
         });
 
         careerBtn.setOnClickListener(v -> {
