@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_radial"
+    android:fitsSystemWindows="true">
+
+    <!-- Edge glow overlay -->
+    <View
+        android:id="@+id/edgeGlow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edge_glow"
+        android:alpha="0"/>
+
+    <!-- Top HUD -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="42dp"
+        android:paddingBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Timer -->
+        <TextView
+            android:id="@+id/timerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60s"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <!-- Difficulty -->
+        <TextView
+            android:id="@+id/difficultyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Easy"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/saffron"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:background="@drawable/pill_saffron"/>
+
+        <!-- Streak -->
+        <TextView
+            android:id="@+id/streakText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🔥 0"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/pill_saffron"/>
+
+        <!-- Spacer -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <!-- Score -->
+        <TextView
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"/>
+    </LinearLayout>
+
+    <!-- Question -->
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12 × 4"
+        android:textSize="52sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="120dp"/>
+
+    <!-- Dial Area -->
+    <FrameLayout
+        android:id="@+id/dialArea"
+        android:layout_width="380dp"
+        android:layout_height="380dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp">
+
+        <!-- Difficulty Ring (background layer) -->
+        <View
+            android:id="@+id/difficultyRing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/difficult_ring"/>
+
+        <!-- Top option -->
+        <TextView
+            android:id="@+id/optionTop"
+            style="@style/DialOption"
+            android:layout_gravity="top|center_horizontal"
+            android:text="48"/>
+
+        <!-- Right option -->
+        <TextView
+            android:id="@+id/optionRight"
+            style="@style/DialOption"
+            android:layout_gravity="center_vertical|end"
+            android:text="36"/>
+
+        <!-- Bottom option -->
+        <TextView
+            android:id="@+id/optionBottom"
+            style="@style/DialOption"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="52"/>
+
+        <!-- Left option -->
+        <TextView
+            android:id="@+id/optionLeft"
+            style="@style/DialOption"
+            android:layout_gravity="center_vertical|start"
+            android:text="44"/>
+
+        <!-- Joystick -->
+        <View
+            android:id="@+id/joystick"
+            android:layout_width="95dp"
+            android:layout_height="95dp"
+            android:layout_gravity="center"
+            android:background="@drawable/joystick_circle"/>
+
+    </FrameLayout>
+
+    <!-- Baba at bottom -->
+    <ImageView
+        android:id="@+id/babaReaction"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/baba_neutral"
+        android:visibility="invisible"/>
+
+    <!-- Floating XP text -->
+    <TextView
+        android:id="@+id/floatingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+1 XP"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/saffron"
+        android:layout_gravity="center"
+        android:alpha="0"/>
+
+</FrameLayout>
