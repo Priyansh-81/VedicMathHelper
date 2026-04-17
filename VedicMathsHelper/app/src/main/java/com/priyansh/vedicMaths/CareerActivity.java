@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.ListenerRegistration;
 
 public class CareerActivity extends AppCompatActivity {
 
@@ -23,15 +25,18 @@ public class CareerActivity extends AppCompatActivity {
     MaterialButton[] sutraButtons = new MaterialButton[16];
     MaterialButton startBtn;
 
-    TextView sutraTitle, sutraDesc;
+    TextView sutraTitle, sutraDesc, progressText, xpBadge;
+    ProgressBar levelProgressBar;
 
     FirebaseFirestore db;
+    ListenerRegistration progressListener;
 
     float lastAngle = 0f;
     float currentRotation = 0f;
 
     int selectedIndex = 0;
     int unlockedTill = 1;
+    int currentLevelProgress = 0;
 
     final float STEP_ANGLE = 22.5f;
 
@@ -45,6 +50,9 @@ public class CareerActivity extends AppCompatActivity {
         dialContainer = findViewById(R.id.dialContainer);
         sutraTitle = findViewById(R.id.sutraTitle);
         sutraDesc = findViewById(R.id.sutraDesc);
+        progressText = findViewById(R.id.progressText);
+        xpBadge = findViewById(R.id.xpBadge);
+        levelProgressBar = findViewById(R.id.levelProgressBar);
         startBtn = findViewById(R.id.startBtn);
         teachingBaba = findViewById(R.id.teaching_baba);
 
@@ -77,6 +85,53 @@ public class CareerActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startListeningProgress();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (progressListener != null) {
+            progressListener.remove();
+        }
+    }
+
+    private void startListeningProgress() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        progressListener = db.collection("users")
+                .document(user.getUid())
+                .addSnapshotListener((doc, error) -> {
+                    if (error != null) return;
+                    if (doc != null && doc.exists()) {
+                        Long xpObj = doc.getLong("xp");
+                        long xp = (xpObj != null) ? xpObj : 0;
+                        xpBadge.setText("XP: " + xp);
+
+                        // Use currentSutra for unlocking if it exists
+                        Long sutraObj = doc.getLong("currentSutra");
+                        
+                        // Otherwise fallback to XP-based unlocking (1 level per 100 XP)
+                        if (sutraObj == null) {
+                            unlockedTill = (int) (xp / 100) + 1;
+                        } else {
+                            unlockedTill = sutraObj.intValue();
+                        }
+
+                        if (unlockedTill > 16) unlockedTill = 16;
+                        
+                        Long progObj = doc.getLong("levelProgress");
+                        currentLevelProgress = (progObj != null) ? progObj.intValue() : 0;
+                        
+                        updateSelection(selectedIndex);
+                    }
+                });
+    }
+
     private void bindButtons() {
         for (int i = 0; i < 16; i++) {
             int id = getResources().getIdentifier(
@@ -93,8 +148,17 @@ public class CareerActivity extends AppCompatActivity {
                 .document(user.getUid())
                 .get()
                 .addOnSuccessListener(doc -> {
-                    Long obj = doc.getLong("currentSutra");
-                    unlockedTill = (obj != null) ? obj.intValue() : 1;
+                    Long xpObj = doc.getLong("xp");
+                    long xp = (xpObj != null) ? xpObj : 0;
+                    xpBadge.setText("XP: " + xp);
+
+                    Long sutraObj = doc.getLong("currentSutra");
+                    if (sutraObj == null) {
+                        unlockedTill = (int) (xp / 100) + 1;
+                    } else {
+                        unlockedTill = sutraObj.intValue();
+                    }
+                    if (unlockedTill > 16) unlockedTill = 16;
                     updateSelection(selectedIndex);
                 });
     }
@@ -187,7 +251,27 @@ public class CareerActivity extends AppCompatActivity {
         }
 
         sutraTitle.setText("Sutra " + (index + 1));
-        sutraDesc.setText("Short description here");
+        sutraDesc.setText(getSutraDescription(index + 1));
+
+        int displayProgress = 0;
+        if (index + 1 < unlockedTill) {
+            displayProgress = 100;
+        } else if (index + 1 == unlockedTill) {
+            displayProgress = currentLevelProgress;
+        }
+
+        levelProgressBar.setProgress(displayProgress);
+        progressText.setText(displayProgress + "% complete");
+    }
+
+    private String getSutraDescription(int id) {
+        switch (id) {
+            case 1: return "Ekadhikena Purvena\n(Squares ending in 5)";
+            case 2: return "Nikhilam Navatashcaramam Dashatah\n(Numbers near base 10/100)";
+            case 3: return "Urdhva-Tiryagbhyam\n(General Multiplication)";
+            case 14: return "Ekanyunena Purvena\n(Multiplication by 9, 99, 999...)";
+            default: return "Ancient Vedic Math Technique";
+        }
     }
 
     private void animateDialEntry() {

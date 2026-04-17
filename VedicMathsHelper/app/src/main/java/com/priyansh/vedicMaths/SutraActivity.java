@@ -2,25 +2,31 @@ package com.priyansh.vedicMaths;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.LayoutInflater;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
-
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.Locale;
 import java.util.Random;
 
 public class SutraActivity extends AppCompatActivity {
 
-    TextView sutraTitle, questionText, hintText, solutionText;
+    TextView sutraTitle, questionText, hintText, solutionText, progressText;
     EditText answerInput;
     Button checkBtn, nextBtn;
+    ProgressBar levelProgressBar;
 
     int sutraNumber;
     int a, b, correctAnswer;
-    int step = 0;
+    int currentStep = 0;
+    int maxSteps = 1;
+    int intermediateTarget = 0;
 
     boolean isDemo = true;
-    int demoStep = 0;
-
     Random random = new Random();
 
     @Override
@@ -34,37 +40,50 @@ public class SutraActivity extends AppCompatActivity {
         questionText = findViewById(R.id.questionText);
         hintText = findViewById(R.id.hintText);
         solutionText = findViewById(R.id.solutionText);
+        progressText = findViewById(R.id.progressText);
         answerInput = findViewById(R.id.answerInput);
         checkBtn = findViewById(R.id.checkBtn);
         nextBtn = findViewById(R.id.nextBtn);
+        levelProgressBar = findViewById(R.id.levelProgressBar);
 
         sutraTitle.setText(getSutraName(sutraNumber));
 
+        loadInitialProgress();
         generateQuestion();
         startDemo();
 
-        checkBtn.setOnClickListener(v -> checkAnswer());
+        checkBtn.setOnClickListener(v -> {
+            performHaptic(v);
+            checkAnswer();
+        });
 
         nextBtn.setOnClickListener(v -> {
+            performHaptic(v);
             if (isDemo) {
                 isDemo = false;
-
                 answerInput.setVisibility(View.VISIBLE);
                 checkBtn.setVisibility(View.VISIBLE);
-                nextBtn.setText("Next");
-
-                step = 0;
+                nextBtn.setText("Next Level");
+                nextBtn.setVisibility(View.GONE);
+                generateQuestion();
+                currentStep = 0;
                 loadStep();
-
             } else {
                 generateQuestion();
-                step = 0;
+                currentStep = 0;
                 loadStep();
+                nextBtn.setVisibility(View.GONE);
+                checkBtn.setVisibility(View.VISIBLE);
+                answerInput.setVisibility(View.VISIBLE);
             }
         });
     }
 
-    // ---------------- SUTRA NAMES ----------------
+    private void performHaptic(View view) {
+        if (AppSettings.isHapticsEnabled(this)) {
+            view.performHapticFeedback(android.view.HapticFeedbackConstants.KEYBOARD_TAP);
+        }
+    }
 
     private String getSutraName(int id) {
         switch (id) {
@@ -88,187 +107,226 @@ public class SutraActivity extends AppCompatActivity {
         }
     }
 
-    // ---------------- QUESTION GENERATION ----------------
-
     private void generateQuestion() {
-
         answerInput.setText("");
         solutionText.setText("");
-
+        
         switch (sutraNumber) {
-
             case 1: // Ekadhikena (square ending 5)
-                a = (random.nextInt(9) + 1) * 10 + 5;
+                int tens = random.nextInt(9) + 1;
+                a = tens * 10 + 5;
                 b = a;
+                maxSteps = 2;
                 break;
-
-            case 2: // Nikhilam
-                a = 100 - (random.nextInt(20) + 1);
-                b = 100 - (random.nextInt(20) + 1);
+            case 2: // Nikhilam (near 100)
+                a = 100 - (random.nextInt(12) + 1);
+                b = 100 - (random.nextInt(12) + 1);
+                maxSteps = 3;
                 break;
-
-            case 3: // Urdhva
-                a = random.nextInt(90) + 10;
-                b = random.nextInt(90) + 10;
+            case 3: // Urdhva (2x2)
+                a = random.nextInt(40) + 11;
+                b = random.nextInt(40) + 11;
+                maxSteps = 3;
                 break;
-
-            case 6: // Anurupyena (near 50)
-                a = 50 + random.nextInt(10);
-                b = 50 + random.nextInt(10);
+            case 14: // Ekanyunena (x99)
+                a = random.nextInt(89) + 10;
+                b = 99;
+                maxSteps = 2;
                 break;
-
-            case 10: // Yavadunam
-                a = 100 - random.nextInt(30);
-                b = 100 - random.nextInt(30);
-                break;
-
             default:
-                a = random.nextInt(50) + 10;
-                b = random.nextInt(50) + 10;
+                a = random.nextInt(20) + 5;
+                b = random.nextInt(20) + 5;
+                maxSteps = 1;
         }
-
         correctAnswer = a * b;
     }
 
-    // ---------------- DEMO MODE ----------------
-
     private void startDemo() {
-
         answerInput.setVisibility(View.GONE);
         checkBtn.setVisibility(View.GONE);
+        nextBtn.setVisibility(View.VISIBLE);
         nextBtn.setText("Start Practice");
-
-        demoStep = 0;
-
         playDemo();
     }
 
     private void playDemo() {
-
         solutionText.setAlpha(0f);
-        solutionText.animate().alpha(1f).setDuration(400).start();
+        solutionText.animate().alpha(1f).setDuration(600).start();
 
         switch (sutraNumber) {
-
             case 1:
-                solutionText.setText(
-                        "Square numbers ending with 5\n\n" +
-                                "Example: 25²\n" +
-                                "2 × 3 = 6\n" +
-                                "Append 25 → 625"
-                );
-                return;
-
+                solutionText.setText("Multiply the first digit by 'one more than itself' and append 25.\n\nExample: 35²\n3 × 4 = 12\nResult: 1225");
+                break;
             case 2:
-                solutionText.setText(
-                        "Use base 100\n\n" +
-                                "Subtract from base\n" +
-                                "Cross subtract\n" +
-                                "Multiply deficits"
-                );
-                return;
-
+                solutionText.setText("Find the deficiency from 100.\n\nExample: 98 × 97\nDeficiencies: -2, -3\n98-3 = 95\n2×3 = 06\nResult: 9506");
+                break;
             case 3:
-                solutionText.setText(
-                        "Vertical & Crosswise multiplication\n\n" +
-                                "Multiply units\nCross multiply\nMultiply tens"
-                );
-                return;
-
-            case 4:
-                solutionText.setText("Used for division via inversion method");
-                return;
-
-            case 5:
-                solutionText.setText("If expressions are equal, result is zero");
-                return;
-
-            case 6:
-                solutionText.setText("Adjust base (like 50 instead of 100)");
-                return;
-
-            case 7:
-                solutionText.setText("Addition and subtraction together");
-                return;
-
-            case 8:
-                solutionText.setText("Completion and non-completion method");
-                return;
-
-            case 9:
-                solutionText.setText("Used in calculus-like transformations");
-                return;
-
-            case 10:
-                solutionText.setText("Find deficiency from base and adjust");
-                return;
-
-            case 11:
-                solutionText.setText("Part and whole relationship");
-                return;
-
-            case 12:
-                solutionText.setText("Remainders using last digit");
-                return;
-
-            case 13:
-                solutionText.setText("Use penultimate and last digits");
-                return;
-
+                solutionText.setText("Vertical and Crosswise multiplication.\n\n1. Multiply units\n2. Cross multiply and add\n3. Multiply tens");
+                break;
             case 14:
-                solutionText.setText("One less than previous");
-                return;
-
-            case 15:
-                solutionText.setText("Product of sum equals sum of product");
-                return;
-
-            case 16:
-                solutionText.setText("Multiplication relationships");
-                return;
+                solutionText.setText("Subtract 1 from the number, then find the complement of the new number.\n\nExample: 42 × 99\n42-1 = 41\n99-41 = 58\nResult: 4158");
+                break;
+            default:
+                solutionText.setText("Vedic Method practice for Sutra " + sutraNumber);
         }
     }
 
-    // ---------------- PRACTICE ----------------
-
     private void loadStep() {
-
         answerInput.setText("");
-        solutionText.setText("");
-
+        questionText.setText(a + ( (a==b && sutraNumber==1) ? "²" : " × " + b));
+        
         switch (sutraNumber) {
-
-            case 1:
-                questionText.setText("Square of " + a);
-                hintText.setText("Multiply first digit with next");
+            case 1: // Ekadhikena
+                if (currentStep == 0) {
+                    int tens = a / 10;
+                    hintText.setText("Step 1: Multiply tens digit (" + tens + ") by " + (tens + 1));
+                    intermediateTarget = tens * (tens + 1);
+                } else {
+                    hintText.setText("Step 2: Append 25 to " + intermediateTarget);
+                    intermediateTarget = correctAnswer;
+                }
                 break;
-
-            case 2:
-                questionText.setText("Use base 100 method");
-                hintText.setText("Find deviations");
+            case 2: // Nikhilam
+                int defA = 100 - a;
+                int defB = 100 - b;
+                if (currentStep == 0) {
+                    hintText.setText("Step 1: Multiply deficiencies (" + defA + " × " + defB + ")");
+                    intermediateTarget = defA * defB;
+                } else if (currentStep == 1) {
+                    hintText.setText("Step 2: Cross subtract (" + a + " - " + defB + ")");
+                    intermediateTarget = a - defB;
+                } else {
+                    hintText.setText("Step 3: Combine parts (" + (a - defB) + " | " + String.format("%02d", (defA * defB)) + ")");
+                    intermediateTarget = correctAnswer;
+                }
                 break;
-
-            case 3:
-                questionText.setText((a % 10) + " × " + (b % 10));
-                hintText.setText("Multiply units");
+            case 14: // Ekanyunena
+                if (currentStep == 0) {
+                    hintText.setText("Step 1: Subtract 1 from " + a);
+                    intermediateTarget = a - 1;
+                } else {
+                    hintText.setText("Step 2: Find complement of " + (a-1) + " from 99");
+                    intermediateTarget = correctAnswer;
+                }
                 break;
-
             default:
-                questionText.setText(a + " × " + b);
-                hintText.setText("Try solving");
+                hintText.setText("Calculate the final product");
+                intermediateTarget = correctAnswer;
         }
     }
 
     private void checkAnswer() {
+        String input = answerInput.getText().toString().trim();
+        if (input.isEmpty()) return;
 
-        if (answerInput.getText().toString().isEmpty()) return;
-
-        int user = Integer.parseInt(answerInput.getText().toString());
-
-        if (user == correctAnswer) {
-            solutionText.setText("✅ Correct!");
-        } else {
-            solutionText.setText("❌ Correct: " + correctAnswer);
+        try {
+            int userAns = Integer.parseInt(input);
+            if (userAns == intermediateTarget) {
+                hideKeyboard();
+                if (currentStep < maxSteps - 1) {
+                    solutionText.setText("✅ Correct! Now for the next step.");
+                    solutionText.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                    currentStep++;
+                    loadStep();
+                } else {
+                    solutionText.setText("✨ Brilliant! Final Answer Correct.");
+                    solutionText.setTextColor(getResources().getColor(android.R.color.holo_green_dark));
+                    checkBtn.setVisibility(View.GONE);
+                    answerInput.setVisibility(View.GONE);
+                    nextBtn.setVisibility(View.VISIBLE);
+                    nextBtn.setText("Next Problem");
+                    
+                    updateUserProgress();
+                }
+            } else {
+                solutionText.setText("❌ Try again! Focus on the hint.");
+                solutionText.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
+            }
+        } catch (NumberFormatException e) {
+            solutionText.setText("Please enter a valid number");
         }
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void loadInitialProgress() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        FirebaseFirestore.getInstance().collection("users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        long currentSutra = doc.getLong("currentSutra") != null ? doc.getLong("currentSutra") : 1;
+                        if (sutraNumber == currentSutra) {
+                            int progress = doc.getLong("levelProgress") != null ? doc.getLong("levelProgress").intValue() : 0;
+                            updateProgressUI(progress);
+                        } else if (sutraNumber < currentSutra) {
+                            updateProgressUI(100);
+                        } else {
+                            updateProgressUI(0);
+                        }
+                    }
+                });
+    }
+
+    private void updateProgressUI(int progress) {
+        levelProgressBar.setProgress(progress);
+        progressText.setText(progress + "% complete");
+    }
+
+    private void showHappyToast(String message) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast_happy, findViewById(android.R.id.content), false);
+
+        TextView text = layout.findViewById(R.id.toastMessage);
+        text.setText(message);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void updateUserProgress() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getUid())
+                .get()
+                .addOnSuccessListener(doc -> {
+                    if (doc.exists()) {
+                        long currentSutra = doc.getLong("currentSutra") != null ? doc.getLong("currentSutra") : 1;
+                        
+                        // Only update progress if playing the currently active (highest) level
+                        if (sutraNumber == currentSutra) {
+                            int progress = doc.getLong("levelProgress") != null ? doc.getLong("levelProgress").intValue() : 0;
+                            progress += 20; // 5 problems to complete level
+
+                            if (progress >= 100) {
+                                db.collection("users").document(user.getUid())
+                                        .update("currentSutra", FieldValue.increment(1),
+                                                "levelProgress", 0,
+                                                "xp", FieldValue.increment(50));
+                                updateProgressUI(100);
+                                showHappyToast("Sutra Mastered! +50 XP");
+                            } else {
+                                db.collection("users").document(user.getUid())
+                                        .update("levelProgress", progress,
+                                                "xp", FieldValue.increment(10));
+                                updateProgressUI(progress);
+                                // Small toast for problem completion
+                                Toast.makeText(this, "Great job! +10 XP", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 }
