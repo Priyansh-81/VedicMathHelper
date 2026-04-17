@@ -15,6 +15,42 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VedicMathTutor">
         <activity
+            android:name=".Sutra16Activity"
+            android:exported="false" />
+        <activity
+            android:name=".sutra15Activity"
+            android:exported="false" />
+        <activity
+            android:name=".sutra14Activity"
+            android:exported="false" />
+        <activity
+            android:name=".sutra13Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra12Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra11Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra10Activity"
+            android:exported="false" />
+        <activity
+            android:name=".sutra9Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Sutra6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".sutra5Activity"
+            android:exported="false" />
+        <activity
             android:name=".sutra4"
             android:exported="false" />
         <activity

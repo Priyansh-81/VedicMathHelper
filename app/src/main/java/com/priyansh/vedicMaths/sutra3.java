@@ -18,7 +18,8 @@ public class sutra3 extends AppCompatActivity {
 
     TextView questionText,hintText,solutionText,scoreText;
     EditText answerInput;
-    Button checkBtn,nextBtn,homeBtn;
+    Button checkBtn,nextBtn;
+    ImageButton homeBtn;
     ProgressBar progressBar;
 
     int a,b,correctAnswer,teachStep=0,score=0,practice=0;
@@ -72,6 +73,9 @@ public class sutra3 extends AppCompatActivity {
                 String btnText = nextBtn.getText().toString();
                 if (btnText.equalsIgnoreCase("Next Sutra")) {
                     startActivity(new Intent(this, sutra4.class));
+                    finish();
+                    return;
+                } else if (btnText.equalsIgnoreCase("Home")) {
                     finish();
                     return;
                 }

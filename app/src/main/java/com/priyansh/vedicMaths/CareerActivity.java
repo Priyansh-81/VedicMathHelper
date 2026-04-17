@@ -78,6 +78,18 @@ public class CareerActivity extends AppCompatActivity {
                     case 2: intent = new Intent(this, sutra2Activity.class); break;
                     case 3: intent = new Intent(this, sutra3.class); break;
                     case 4: intent = new Intent(this, sutra4.class); break;
+                    case 5: intent = new Intent(this, sutra5Activity.class); break;
+                    case 6: intent = new Intent(this, Sutra6Activity.class); break;
+                    case 7: intent = new Intent(this, Sutra7Activity.class); break;
+                    case 8: intent = new Intent(this, Sutra8Activity.class); break;
+                    case 9: intent = new Intent(this, sutra9Activity.class); break;
+                    case 10: intent = new Intent(this, Sutra10Activity.class); break;
+                    case 11: intent = new Intent(this, Sutra11Activity.class); break;
+                    case 12: intent = new Intent(this, Sutra12Activity.class); break;
+                    case 13: intent = new Intent(this, sutra13Activity.class); break;
+                    case 14: intent = new Intent(this, sutra14Activity.class); break;
+                    case 15: intent = new Intent(this, sutra15Activity.class); break;
+                    case 16: intent = new Intent(this, Sutra16Activity.class); break;
                     default: intent = new Intent(this, SutraActivity.class); break;
                 }
                 
@@ -210,10 +222,22 @@ public class CareerActivity extends AppCompatActivity {
 
     private String getSutraDescription(int num) {
         switch(num) {
-            case 1: return "Squares ending in 5";
-            case 2: return "All from 9 and last from 10";
-            case 3: return "Vertical and Crosswise";
-            case 4: return "Transpose and Adjust";
+            case 1: return "Ekadhikena Purvena: Squares ending in 5";
+            case 2: return "Nikhilam: All from 9 and last from 10";
+            case 3: return "Urdhva-Tiryagbhyam: Vertical and Crosswise";
+            case 4: return "Paravartya Yojayet: Transpose and Adjust";
+            case 5: return "Shunyam Saamya: When sums are equal, result is zero";
+            case 6: return "Anurupyena: Ratios and Proportions";
+            case 7: return "Sankalana: Addition and Subtraction";
+            case 8: return "Puranapuranabhyam: By Completion";
+            case 9: return "Chalana-Kalanabhyam: By Motion & Calculation";
+            case 10: return "Yavadunam: Whatever the Deficiency";
+            case 11: return "Vyashti Samashti: Part and Whole";
+            case 12: return "Shesanyankena: Remainder by Last Digit";
+            case 13: return "Sopantyadvayamantyam: Penultimate and Last";
+            case 14: return "Ekanyunena Purvena: One Less than Previous";
+            case 15: return "Gunitasamuccayah: Product of Sums";
+            case 16: return "Gunakasamuccayah: Factors and Multipliers";
             default: return "Learn Vedic Mathematics";
         }
     }

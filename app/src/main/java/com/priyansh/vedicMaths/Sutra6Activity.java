@@ -1,3 +1,4 @@
+// Sutra6Activity.java
 package com.priyansh.vedicMaths;
 
 import android.content.Intent;
@@ -7,14 +8,9 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.Random;
 
-public class sutra4 extends AppCompatActivity {
+public class Sutra6Activity extends AppCompatActivity {
 
     TextView questionText,hintText,solutionText,scoreText;
     EditText answerInput;
@@ -22,29 +18,28 @@ public class sutra4 extends AppCompatActivity {
     ImageButton homeBtn;
     ProgressBar progressBar;
 
-    int a,b,correctAnswer,teachStep=0,score=0,practice=0;
+    int teachStep=0,score=0,practice=0;
     boolean learning=true;
     Handler h=new Handler();
     Random r=new Random();
-    
-    FirebaseFirestore db;
 
     String[] teach={
-            "✨ Paravartya Yojayet means Transpose & Adjust",
-            "🧠 Used in fast division and algebra",
-            "📘 Example: 144 ÷ 12",
-            "Think: 12 × ? = 144",
-            "12 × 12 = 144",
-            "🎉 Answer = 12",
+            "✨ Anurupyena = Proportionately",
+            "🧠 Used for ratios, proportions & checking equations",
+            "📘 Example: 2 : 4 = 3 : 6 ?",
+            "2/4 = 1/2 and 3/6 = 1/2",
+            "Both sides equal → Proportional ✅",
+            "🎉 Answer = Yes",
             "🚀 Ready for Practice!"
     };
+
+    int a,b,c,d;
+    String correctAnswer;
 
     @Override
     protected void onCreate(Bundle b1){
         super.onCreate(b1);
-        setContentView(R.layout.activity_sutra4);
-        
-        db = FirebaseFirestore.getInstance();
+        setContentView(R.layout.activity_sutra6);
 
         questionText=findViewById(R.id.questionText);
         hintText=findViewById(R.id.hintText);
@@ -67,22 +62,20 @@ public class sutra4 extends AppCompatActivity {
         if(learning){
             teachStep++;
             showTeach();
-        }else{
+        } else {
             if(practice>=3){
                 String btnText = nextBtn.getText().toString();
                 if (btnText.equalsIgnoreCase("Next Sutra")) {
-                    startActivity(new Intent(this, sutra5Activity.class));
+                    startActivity(new Intent(this, Sutra7Activity.class));
                     finish();
                     return;
                 } else if (btnText.equalsIgnoreCase("Home")) {
                     finish();
                     return;
                 }
-                
-                updateProgress(5);
-                
+
                 questionText.setText("🏆 Sutra Mastered!");
-                hintText.setText("You solved 3 questions!");
+                hintText.setText("You solved 3 ratio questions!");
                 solutionText.setText("What would you like to do next?");
                 
                 answerInput.setVisibility(View.GONE);
@@ -97,33 +90,17 @@ public class sutra4 extends AppCompatActivity {
         }
     }
 
-    private void updateProgress(int nextSutra) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) return;
-
-        db.collection("users").document(user.getUid())
-                .get()
-                .addOnSuccessListener(doc -> {
-                    long current = doc.contains("currentSutra") ? doc.getLong("currentSutra") : 1;
-                    if (nextSutra > current) {
-                        db.collection("users").document(user.getUid())
-                                .update("currentSutra", nextSutra);
-                    }
-                });
-    }
-
     void showTeach(){
         if(teachStep>=teach.length){
             learning=false;
             answerInput.setVisibility(View.VISIBLE);
             checkBtn.setVisibility(View.VISIBLE);
-            nextBtn.setText("Next Question");
             generateQ();
             return;
         }
 
         progressBar.setProgress((teachStep+1)*14);
-        questionText.setText("Sutra 4 Learning");
+        questionText.setText("Sutra 6 Learning");
         hintText.setText("");
         solutionText.setText(teach[teachStep]);
         fade(solutionText);
@@ -131,46 +108,50 @@ public class sutra4 extends AppCompatActivity {
         answerInput.setVisibility(View.GONE);
         checkBtn.setVisibility(View.GONE);
 
-        if(teachStep==2)
-            animate(new String[]{"144 ÷ 12","12×10=120","Need 24 more","12×2"},900);
+        if(teachStep==2){
+            animate(new String[]{
+                    "2:4 = 3:6",
+                    "2×6 = 12",
+                    "4×3 = 12",
+                    "Equal ✔"
+            },800);
+        }
     }
 
     void generateQ(){
-        b=(r.nextInt(8)+2);
-        correctAnswer=r.nextInt(10)+2;
-        a=b*correctAnswer;
+        a=r.nextInt(8)+1;
+        b=r.nextInt(8)+2;
+        c=a*2;
+        d=b*2;
+        correctAnswer="yes";
 
-        questionText.setText(a+" ÷ "+b);
-        hintText.setText("Find the quotient");
+        questionText.setText(a+":"+b+" = "+c+":"+d+" ?");
+        hintText.setText("Type Yes or No");
         solutionText.setText("");
         answerInput.setText("");
         progressBar.setProgress(100);
+        nextBtn.setText("Next ➜");
     }
 
     void check(){
         if(nextBtn.getText().toString().equalsIgnoreCase("Next Sutra")) return;
 
-        if(answerInput.getText().toString().isEmpty()) return;
+        String user=answerInput.getText().toString().trim().toLowerCase();
+        if(user.isEmpty()) return;
 
-        try {
-            int user=Integer.parseInt(answerInput.getText().toString());
-
-            if(user==correctAnswer){
-                if (practice < 3) {
-                    score+=10;
-                    practice++;
-                }
-                solutionText.setText("✅ Correct!");
-                solutionText.setTextColor(Color.GREEN);
-            } else {
-                solutionText.setText("❌ Correct: "+correctAnswer);
-                solutionText.setTextColor(Color.RED);
+        if(user.equals(correctAnswer)){
+            if (practice < 3) {
+                score+=10;
+                practice++;
             }
-
-            scoreText.setText("⭐ Score: "+score+" | ✔ "+practice+"/3");
-        } catch (NumberFormatException e) {
-             Toast.makeText(this, "Please enter a valid number", Toast.LENGTH_SHORT).show();
+            solutionText.setText("✅ Correct!");
+            solutionText.setTextColor(Color.GREEN);
+        } else {
+            solutionText.setText("❌ Correct: Yes");
+            solutionText.setTextColor(Color.RED);
         }
+
+        scoreText.setText("⭐ Score: "+score+" | ✔ "+practice+"/3");
     }
 
     void animate(String[] arr,int d){

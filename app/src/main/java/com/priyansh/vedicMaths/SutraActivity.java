@@ -79,6 +79,7 @@ public class SutraActivity extends AppCompatActivity {
                 hintText.setText("You've successfully learned Sutra 1!");
                 solutionText.setText("What would you like to do next?");
                 
+                answerInput.setVisibility(View.GONE);
                 checkBtn.setVisibility(View.VISIBLE);
                 checkBtn.setText("Home");
                 nextBtn.setText("Next Sutra");
@@ -211,6 +212,8 @@ public class SutraActivity extends AppCompatActivity {
     }
 
     private void checkAnswer(){
+        if(nextBtn.getText().toString().equalsIgnoreCase("Next Sutra")) return;
+
         if(answerInput.getText().toString().isEmpty()) return;
         String txt=answerInput.getText().toString().trim();
 
