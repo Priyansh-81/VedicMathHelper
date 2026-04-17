@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "264080018339",
+    "project_id": "vedicmathhelper-e3e47",
+    "storage_bucket": "vedicmathhelper-e3e47.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264080018339:android:045b5851c3a66eba3da816",
+        "android_client_info": {
+          "package_name": "com.priyansh.vedicMaths"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpI3AzkvdW8zOK7GTCO2tnwWFbNVMo1HY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

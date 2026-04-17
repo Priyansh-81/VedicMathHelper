@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="24dp"
+    android:background="@drawable/bg_radial">
+
+    <TextView
+        android:id="@+id/resultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Challenge Complete"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageView
+        android:id="@+id/resultBaba"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/baba_happy"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:id="@+id/rankText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Novice"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/saffron"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textSize="22sp"
+        android:textColor="@color/text_primary"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/xpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+0 XP"
+        android:textSize="20sp"
+        android:textColor="@color/saffron"
+        android:layout_marginBottom="32dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playAgainBtn"
+        style="@style/AccentButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Play Again"
+        android:layout_marginBottom="12dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/homeBtn"
+        style="@style/OutlineButton_saffron"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Back to Home"/>
+
+</LinearLayout>
