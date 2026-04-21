@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/homeRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,20 +13,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/sun_rays_overlay"
-        android:alpha="0.25" />
+        android:alpha="0.20" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="20dp">
 
+        <!-- Top Stat Bar -->
         <LinearLayout
+            android:id="@+id/topBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:background="@drawable/stat_bar_bg"
+            android:padding="10dp"
+            android:elevation="4dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/btn_star_big_on"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/deep_saffron"
+                android:contentDescription="@string/xp_icon_desc" />
 
             <TextView
                 android:id="@+id/userInfoText"
@@ -33,74 +50,100 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="XP: 0 • Streak: 0"
-                android:textSize="16sp"
-                android:textColor="@color/text_secondary" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/text_primary" />
 
             <ImageView
                 android:id="@+id/scannerBtn"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="12dp"
+                android:layout_marginEnd="8dp"
                 android:src="@android:drawable/ic_menu_camera"
-                android:contentDescription="Scanner"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="6dp" />
+                android:contentDescription="@string/scanner_desc"
+                android:background="@drawable/icon_btn_bg"
+                android:padding="10dp"
+                app:tint="@color/temple_maroon" />
 
             <ImageView
                 android:id="@+id/profileIcon"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/profile"
-                android:contentDescription="Profile"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:padding="6dp" />
+                android:contentDescription="@string/profile_desc"
+                android:background="@drawable/icon_btn_bg"
+                android:padding="4dp" />
         </LinearLayout>
 
+        <!-- Main Character Area -->
         <ImageView
             android:id="@+id/homeBaba"
-            android:layout_width="480dp"
-            android:layout_height="480dp"
-            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:src="@drawable/baba_home_screen"
-            android:contentDescription="Home Baba"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
+            android:contentDescription="@string/home_baba_desc"
             android:alpha="0"
-            android:translationY="60dp"/>
+            android:translationY="60dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintWidth_percent="0.85"
+            app:layout_constraintTop_toBottomOf="@id/topBar"
+            app:layout_constraintBottom_toTopOf="@id/titleText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.4" />
 
         <TextView
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vedic Math"
-            android:layout_gravity="center"
+            android:text="@string/app_title_vedic"
             android:fontFamily="@font/samarkan"
-            android:textSize="48sp"
+            android:textSize="54sp"
+            android:textColor="@color/temple_maroon"
             android:alpha="0"
             android:translationY="60dp"
-            android:layout_marginTop="-70dp"/>
+            app:layout_constraintBottom_toTopOf="@id/buttonContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="32dp" />
 
-        <View
+        <!-- Bottom Actions -->
+        <LinearLayout
+            android:id="@+id/buttonContainer"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/careerBtn"
-            style="@style/AccentButton"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="Continue Journey"
-            android:layout_marginBottom="16dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/careerBtn"
+                style="@style/AccentButton"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:text="@string/continue_journey"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                android:layout_marginBottom="16dp"
+                app:icon="@android:drawable/ic_media_play"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/challengeBtn"
-            style="@style/AccentButton"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="Challenge"
-            android:layout_marginBottom="16dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/challengeBtn"
+                style="@style/AccentButton"
+                android:layout_width="match_parent"
+                android:layout_height="68dp"
+                android:text="@string/challenge_mode"
+                android:textSize="18sp"
+                app:cornerRadius="20dp"
+                android:backgroundTint="@color/saffron"
+                app:icon="@android:drawable/ic_menu_compass"
+                app:iconGravity="textStart"
+                app:iconPadding="12dp"/>
+        </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

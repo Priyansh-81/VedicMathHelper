@@ -16,6 +16,21 @@
     <string name="invalid_number">Please enter a valid number</string>
     <string name="sutra_mastered">Sutra Mastered! +50 XP</string>
     <string name="great_job">Great job! +10 XP</string>
+    <string name="xp_icon_desc">XP Icon</string>
+    <string name="scanner_desc">Scanner</string>
+    <string name="profile_desc">Profile Icon</string>
+    <string name="continue_journey">Continue Journey</string>
+    <string name="challenge_mode">Challenge Mode</string>
+    <string name="home_baba_desc">Home Baba Avatar</string>
+    <string name="app_title_vedic">Vedic Math</string>
+    <string name="scholar_profile">Scholar Profile</string>
+    <string name="total_xp">Total XP</string>
+    <string name="best_streak">Best Streak</string>
+    <string name="preferences_label">Preferences</string>
+    <string name="account_actions_label">Account Actions</string>
+    <string name="change_password">Change Password</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="delete_scholar_profile">Delete Scholar Profile</string>
 
     <!-- Tutorial Strings -->
     <string name="tutorial_welcome_title">Namaste, Scholar!</string>

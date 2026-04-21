@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    TextView emailText, xpText, streakText;
+    TextView emailText, xpText;
     MaterialButton logoutBtn, deleteAccountBtn, changePasswordBtn;
 
     FirebaseAuth mAuth;
@@ -40,7 +40,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         emailText = findViewById(R.id.emailText);
         xpText = findViewById(R.id.xpText);
-        streakText = findViewById(R.id.streakText);
 
         logoutBtn = findViewById(R.id.logoutBtn);
         deleteAccountBtn = findViewById(R.id.deleteAccountBtn);
@@ -90,11 +89,8 @@ public class ProfileActivity extends AppCompatActivity {
                     .get()
                     .addOnSuccessListener(documentSnapshot -> {
                         if (documentSnapshot.exists()) {
-                            Long xp = documentSnapshot.getLong("xp");
-                            Long streak = documentSnapshot.getLong("streak");
-
-                            xpText.setText("XP: " + (xp != null ? xp : 0));
-                            streakText.setText("Best Streak: " + (streak != null ? streak : 0));
+                            long xp = (documentSnapshot.getLong("xp") != null) ? documentSnapshot.getLong("xp") : 0;
+                            xpText.setText(String.format("%,d", xp));
                         }
                     });
         }
@@ -106,26 +102,13 @@ public class ProfileActivity extends AppCompatActivity {
             FirebaseUser currentUser = mAuth.getCurrentUser();
             if (currentUser == null) return;
 
-            LinearLayout layout = new LinearLayout(this);
-            layout.setOrientation(LinearLayout.VERTICAL);
-            layout.setPadding(50, 20, 50, 0);
-
-            EditText currentPassword = new EditText(this);
-            currentPassword.setHint("Current Password");
-            currentPassword.setInputType(InputType.TYPE_CLASS_TEXT |
-                    InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
-            EditText newPassword = new EditText(this);
-            newPassword.setHint("New Password");
-            newPassword.setInputType(InputType.TYPE_CLASS_TEXT |
-                    InputType.TYPE_TEXT_VARIATION_PASSWORD);
-
-            layout.addView(currentPassword);
-            layout.addView(newPassword);
+            View dialogView = getLayoutInflater().inflate(R.layout.dialog_edit_password, null);
+            EditText currentPassword = dialogView.findViewById(R.id.currentPasswordEdit);
+            EditText newPassword = dialogView.findViewById(R.id.newPasswordEdit);
 
             new MaterialAlertDialogBuilder(this, R.style.VedicDialog)
                     .setTitle("Change Password")
-                    .setView(layout)
+                    .setView(dialogView)
                     .setPositiveButton("Change", (dialog, which) -> {
 
                         String currPass = currentPassword.getText().toString().trim();

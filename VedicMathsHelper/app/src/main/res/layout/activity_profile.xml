@@ -1,27 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/bg_radial"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/topBar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        app:titleTextColor="@color/text_primary"
-        app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
-        app:navigationIconTint="@color/text_primary"
-        android:paddingHorizontal="8dp"
-        android:layout_marginTop="16dp"/>
+        app:elevation="0dp">
 
-    <ScrollView
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/baseline_arrow_back_ios_24"
+            app:navigationIconTint="@color/text_primary"
+            app:title="Scholar Profile"
+            app:titleCentered="true"
+            app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+            app:titleTextColor="@color/text_primary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,65 +36,108 @@
             android:orientation="vertical"
             android:padding="24dp">
 
-            <ImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/baba_profile_screen"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:contentDescription="baba"/>
-
-            <TextView
-                android:id="@+id/emailText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="user@email.com"
-                android:textSize="18sp"
-                android:textColor="@color/text_primary"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"/>
-
-            <TextView
-                android:id="@+id/xpText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="XP: 0"
-                android:textSize="16sp"
-                android:textColor="@color/text_secondary"
-                android:layout_gravity="center"
-                android:layout_marginTop="4dp" />
-
-            <TextView
-                android:id="@+id/streakText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Streak: 0 days"
-                android:textSize="16sp"
-                android:textColor="@color/text_secondary"
-                android:layout_gravity="center"
-                android:layout_marginBottom="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preferences"
-                android:textSize="16sp"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="16dp" />
-
+            <!-- Avatar & Stats Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="2dp"
-                app:cardBackgroundColor="@color/soft_green">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#20000000"
+                app:cardBackgroundColor="#60FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp"
+                    android:gravity="center">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        app:cardCornerRadius="70dp"
+                        app:cardElevation="4dp"
+                        app:strokeWidth="3dp"
+                        app:strokeColor="@color/saffron">
+                        <ImageView
+                            android:id="@+id/profileBaba"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/baba_profile_screen"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="@string/profile_desc"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/emailText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="scholar@vedic.com"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginTop="16dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginTop="12dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                            <TextView
+                                android:id="@+id/xpText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1,240"
+                                android:textSize="22sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/deep_saffron"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total XP"
+                                android:textSize="14sp"
+                                android:textColor="@color/text_secondary"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Preferences"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="4dp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#10000000"
+                app:cardBackgroundColor="#40FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/hapticSwitch"
@@ -95,14 +145,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Haptic Feedback"
-                        android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="10dp"
-                        android:background="#22000000"/>
+                        android:layout_marginHorizontal="12dp"
+                        android:background="#10000000"/>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/musicSwitch"
@@ -110,22 +160,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Background Music"
-                        android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginVertical="10dp"
-                        android:background="#22000000"/>
+                        android:layout_marginHorizontal="12dp"
+                        android:background="#10000000"/>
 
                     <com.google.android.material.switchmaterial.SwitchMaterial
                         android:id="@+id/soundSwitch"
                         style="@style/VedicSwitch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Sound Feedback"
-                        android:textColor="@color/text_primary"
-                        android:checked="true"/>
+                        android:text="Sound Effects"
+                        android:padding="12dp"
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -133,38 +184,50 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Account"
-                android:textSize="16sp"
-                android:textColor="@color/text_primary"
-                android:layout_marginTop="32dp"/>
+                android:text="Account Actions"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="32dp"
+                android:layout_marginStart="4dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/changePasswordBtn"
-                style="@style/OutlineButton_saffron"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:text="Change Password"
+                android:textColor="@color/text_primary"
+                android:gravity="start|center_vertical"
+                app:icon="@android:drawable/ic_lock_idle_lock"
+                app:iconTint="@color/deep_saffron"
                 android:layout_marginTop="8dp" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/logoutBtn"
-                style="@style/OutlineButton_Mred"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Logout"
-                android:layout_marginTop="8dp" />
+                android:layout_height="56dp"
+                android:text="Sign Out"
+                android:textColor="@color/muted_red"
+                android:gravity="start|center_vertical"
+                app:icon="@android:drawable/ic_lock_power_off"
+                app:iconTint="@color/muted_red" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/deleteAccountBtn"
                 style="@style/FillBtnMred"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Delete Account"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp" />
+                android:layout_height="60dp"
+                android:text="Delete Scholar Profile"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="40dp"
+                app:cornerRadius="16dp" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

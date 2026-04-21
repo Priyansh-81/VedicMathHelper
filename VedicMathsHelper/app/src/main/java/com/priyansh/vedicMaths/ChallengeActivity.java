@@ -113,18 +113,101 @@ public class ChallengeActivity extends AppCompatActivity {
     }
 
     private VedicQuestion generateVedicQuestion(Tier tier) {
-        switch (tier.label) {
-            case "Easy":
-                return generateEasy();
-            case "Medium":
-                return generateMedium();
-            case "Hard":
-                return generateHard();
-            case "Expert":
-                return generateExpert();
+        int sutra = random.nextInt(16) + 1; // 1 to 16
+        
+        switch (sutra) {
+            case 1: // Ekadhikena Purvena - Squaring numbers ending in 5
+                int base1 = (tier.xp * 2) + random.nextInt(10);
+                int n1 = base1 * 10 + 5;
+                return new VedicQuestion(n1 + "²", n1 * n1);
+                
+            case 2: // Nikhilam - Multiplication near base
+                int base2 = (tier.xp > 2) ? 100 : 10;
+                int off2a = random.nextInt(tier.xp + 2) + 1;
+                int off2b = random.nextInt(tier.xp + 2) + 1;
+                int n2a = base2 - off2a;
+                int n2b = base2 - off2b;
+                return new VedicQuestion(n2a + " × " + n2b, n2a * n2b);
+                
+            case 3: // Urdhva-Tiryagbhyam - General multiplication
+                int n3a = random.nextInt(tier.xp * 20) + 11;
+                int n3b = random.nextInt(tier.xp * 20) + 11;
+                return new VedicQuestion(n3a + " × " + n3b, n3a * n3b);
+                
+            case 4: // Paravartya - Division (simplified to quotient)
+                int div4 = 11 + random.nextInt(3);
+                int quot4 = random.nextInt(tier.xp * 5) + 5;
+                int n4 = div4 * quot4;
+                return new VedicQuestion(n4 + " ÷ " + div4, quot4);
+                
+            case 5: // Shunyam - Equation constants (simplified)
+                int n5 = random.nextInt(tier.xp * 10) + 1;
+                return new VedicQuestion("If x + " + n5 + " = 0, x?", -n5);
+                
+            case 6: // Anurupyena - Squaring near sub-base
+                int subBase6 = (random.nextInt(4) + 2) * 10;
+                int n6 = subBase6 + (random.nextInt(3) + 1);
+                return new VedicQuestion(n6 + "²", n6 * n6);
+                
+            case 7: // Sankalana-Vyavakalanabhyam - Addition/Subtraction
+                int n7a = random.nextInt(tier.xp * 50) + 20;
+                int n7b = random.nextInt(tier.xp * 50) + 20;
+                if (random.nextBoolean()) return new VedicQuestion(n7a + " + " + n7b, n7a + n7b);
+                else return new VedicQuestion(Math.max(n7a, n7b) + " - " + Math.min(n7a, n7b), Math.abs(n7a - n7b));
+                
+            case 8: // Puranapuranabhyam - Completion
+                int n8a = (random.nextInt(9) + 1) * 10 - random.nextInt(3) - 1;
+                int n8b = random.nextInt(15) + 5;
+                return new VedicQuestion(n8a + " + " + n8b, n8a + n8b);
+                
+            case 9: // Chalana-Kalanabhyam - Root (simplified)
+                int root9 = random.nextInt(tier.xp * 4) + 2;
+                return new VedicQuestion("√" + (root9 * root9), root9);
+                
+            case 10: // Yavadunam - Squaring near base
+                int base10 = 100;
+                int off10 = random.nextInt(10) + 1;
+                int n10 = base10 - off10;
+                return new VedicQuestion(n10 + "²", n10 * n10);
+                
+            case 11: // Vyashtisamanstih - Sum of digits (simplified)
+                int n11 = random.nextInt(tier.xp * 100) + 100;
+                int sum11 = 0;
+                int temp11 = n11;
+                while (temp11 > 0) { sum11 += temp11 % 10; temp11 /= 10; }
+                return new VedicQuestion("Digit sum: " + n11, sum11);
+                
+            case 12: // Shesanyankena - Division by 9s (simplified)
+                int n12 = (random.nextInt(tier.xp * 10) + 5) * 9;
+                return new VedicQuestion(n12 + " ÷ 9", n12 / 9);
+                
+            case 13: // Sopantyadvayamantyam - Simple Linear Equation
+                int n13 = random.nextInt(tier.xp * 5) + 1;
+                return new VedicQuestion("2x + " + (n13 * 2) + " = 0, x?", -n13);
+                
+            case 14: // Ekanyunena Purvena - Multiplication by 99
+                int n14 = random.nextInt(89) + 10;
+                return new VedicQuestion(n14 + " × 99", n14 * 99);
+                
+            case 15: // Gunakasamuccayah - Digit sum check (simplified)
+                int n15a = random.nextInt(20) + 2;
+                int n15b = random.nextInt(20) + 2;
+                return new VedicQuestion("Digit sum of (" + n15a + "×" + n15b + ")", getDigitSum(n15a * n15b));
+                
+            case 16: // Gunita Samuccayah - Sc of product (simplified)
+                int n16 = random.nextInt(tier.xp * 3) + 1;
+                return new VedicQuestion("Sum of coeff: (x+" + n16 + ")²", (1 + n16) * (1 + n16));
+                
             default:
-                return generateMaster();
+                return generateEasy();
         }
+    }
+
+    private int getDigitSum(int n) {
+        int sum = 0;
+        while (n > 0) { sum += n % 10; n /= 10; }
+        if (sum > 9) return getDigitSum(sum);
+        return sum;
     }
 
 
@@ -358,7 +441,13 @@ public class ChallengeActivity extends AppCompatActivity {
         performHaptic(option);
         performSound();
 
-        int selected = Integer.parseInt(option.getText().toString());
+        int selected;
+        try {
+            selected = Integer.parseInt(option.getText().toString());
+        } catch (NumberFormatException e) {
+            // Handle cases where the text might not be a simple integer (e.g., negative signs or non-numeric if question text leaked)
+            return;
+        }
 
         if (selected == correctAnswer) {
             score += currentXP;
