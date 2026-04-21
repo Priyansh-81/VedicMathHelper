@@ -234,6 +234,17 @@ public class SutraActivity extends AppCompatActivity {
                     "Applicable to: Equations of various forms, e.g., (x+a)(x+b) = (x+c)(x+d) where ab=cd.\n\n" +
                     "Method:\n" +
                     "If the product of constants is equal on both sides, then x = 0.";
+            case 6: return "Anurupyena (By Proportion)\n\n" +
+                    "Applicable to: Squaring numbers near a sub-base (like 20, 30, 40 etc.).\n\n" +
+                    "Method:\n" +
+                    "1. Find the deviation from the sub-base.\n" +
+                    "2. Add the deviation to the number and multiply by the sub-base ratio.\n" +
+                    "3. Square the deviation and append (with carry rule).\n\n" +
+                    "Example: 22² (Sub-base 20, ratio 2)\n" +
+                    "1. Deviation: +2\n" +
+                    "2. Left: (22+2) × 2 = 48\n" +
+                    "3. Right: 2² = 4\n" +
+                    "Result: 484";
             case 7: return "Sankalana-Vyavakalanabhyam (By Addition and By Subtraction)\n\n" +
                     "Applicable to: Solving simultaneous equations where coefficients are interchanged.\n\n" +
                     "Method:\n" +
@@ -244,6 +255,12 @@ public class SutraActivity extends AppCompatActivity {
                     "Applicable to: Addition and subtraction by completing the next multiple of 10.\n\n" +
                     "Example: 48 + 7\n" +
                     "Take 2 from 7 to make 48 into 50. Then 50 + 5 = 55.";
+            case 9: return "Chalana-Kalanabhyam (Sequential Motion)\n\n" +
+                    "Applicable to: Factorizing quadratic equations of the form x² + (a+b)x + ab = 0.\n\n" +
+                    "Method:\n" +
+                    "1. Find two numbers that sum to the middle coefficient (a+b) and multiply to the constant term (ab).\n" +
+                    "2. The factors are (x+a) and (x+b).\n" +
+                    "3. The roots are x = -a and x = -b.";
             case 10: return "Yavadunam (By the Deficiency)\n\n" +
                     "Applicable to: Squaring numbers near a base (like 100).\n\n" +
                     "Method:\n" +
@@ -251,22 +268,55 @@ public class SutraActivity extends AppCompatActivity {
                     "2. Subtract 'd' from the number: (n - d).\n" +
                     "3. Square the deficiency: d².\n" +
                     "4. Append (n-d) and d².";
+            case 11: return "Vyashtisamanstih (Individuality and Totality)\n\n" +
+                    "Applicable to: Verification of factorization and solving complex equations.\n\n" +
+                    "Method for Scrutiny:\n" +
+                    "The Sum of Coefficients (Sc) of the product is equal to the product of the Sc of its factors.\n\n" +
+                    "Example: (x+2)(x+3) = x² + 5x + 6\n" +
+                    "Sc of (x+2) = 1+2 = 3\n" +
+                    "Sc of (x+3) = 1+3 = 4\n" +
+                    "Product of Sc = 3 × 4 = 12\n\n" +
+                    "Sc of (x² + 5x + 6) = 1 + 5 + 6 = 12.\n" +
+                    "Since 12 = 12, the factorization is correct!";
+            case 12: return "Shesanyankena Charamena (The remainders by the last digit)\n\n" +
+                    "Applicable to: Division of numbers ending in 9 (or similar).\n\n" +
+                    "Method:\n" +
+                    "1. For a divisor ending in 9 (like 19), use 2 (one more than the first digit) as the auxiliary divisor.\n" +
+                    "2. Divide the digits from left to right, carrying remainders to the next step.\n\n" +
+                    "Example: 1/19\n" +
+                    "Divide 1 by 2: Q=0, R=1 -> Next digit is 10\n" +
+                    "Divide 10 by 2: Q=5, R=0 -> Next digit is 5\n" +
+                    "Divide 5 by 2: Q=2, R=1 -> Next digit is 12...";
             case 13: return "Sopantyadvayamantyam (The ultimate and twice the penultimate)\n\n" +
                     "Applicable to: Equations like 1/(x+a) + 1/(x+b) = 0.\n\n" +
                     "Method:\n" +
-                    "The solution is x = -(a+b)/2.";
+                    "According to this Sutra, for equations of this form, the sum of the denominators is zero.\n" +
+                    "(x+a) + (x+b) = 0\n" +
+                    "2x + (a+b) = 0\n" +
+                    "x = -(a+b)/2\n\n" +
+                    "Example: 1/(x+2) + 1/(x+4) = 0\n" +
+                    "2x + 6 = 0  => x = -3";
             case 14: return "Ekanyunena Purvena (By one less than the previous one)\n\n" +
-                    "Applicable to: Multiplying a number by a string of 9s (9, 99, 999...).\n\n" +
+                    "Applicable to: Multiplication of any number by 9, 99, 999, etc.\n\n" +
                     "Method:\n" +
-                    "1. Left part: Subtract 1 from the number.\n" +
-                    "2. Right part: Subtract the left part result from the 9s.\n\n" +
+                    "1. Left Part: Subtract 1 from the multiplicand (number being multiplied).\n" +
+                    "2. Right Part: Find the 9s complement of the Left Part (subtract each digit from 9).\n\n" +
                     "Example: 43 × 99\n" +
-                    "Left: 43-1 = 42\n" +
-                    "Right: 99-42 = 57\n" +
+                    "1. Left Part: 43 - 1 = 42\n" +
+                    "2. Right Part: 99 - 42 = 57\n" +
                     "Result: 4257";
             case 15: return "Gunakasamuccayah (The product of the sum of the coefficients...)\n\n" +
                     "Applicable to: Verifying results using Digit Sums (Casting out 9s).\n\n" +
                     "Rule: The digit sum of the product equals the product of the digit sums of the factors.";
+            case 16: return "Gunita Samuccayah (The product of the sum...)\n\n" +
+                    "Applicable to: Verifying polynomial factorization.\n\n" +
+                    "Rule: In a quadratic expression (x+a)(x+b) = x² + (a+b)x + ab:\n" +
+                    "Sum of coefficients (Sc) of the product = product of the Sc of each factor.\n\n" +
+                    "Example: (x+1)(x+2) = x² + 3x + 2\n" +
+                    "Sc(f1) = 1+1=2\n" +
+                    "Sc(f2) = 1+2=3\n" +
+                    "Sc(Product) = 2×3 = 6\n" +
+                    "Verify: 1+3+2 = 6. Matches!";
             default: return "This Vedic Sutra provides a high-speed mental calculation technique. Follow the step-by-step instructions in the practice mode to master its application!";
         }
     }
@@ -343,10 +393,11 @@ public class SutraActivity extends AppCompatActivity {
             case 4: // Paravartya (Division by divisor slightly above base)
                 // divisor will be 1x (11, 12, 13, 14)
                 b = 10 + random.nextInt(4) + 1;
-                // dividend 3 digits for better teaching (100 - 499)
-                a = (random.nextInt(4) + 1) * 100 + (random.nextInt(8) + 1) * 10 + random.nextInt(9);
+                // Pick integer quotient to ensure exact division for clean learning
+                int quotient4 = random.nextInt(30) + 10;
+                a = b * quotient4;
                 maxSteps = isDemo ? 5 : 1;
-                correctAnswer = a / b;
+                correctAnswer = quotient4;
                 break;
             case 5: // Shunyam (Specific case: (x+a)(x+b) = (x+c)(x+d) where ab=cd)
                 a = random.nextInt(8) + 2;
@@ -367,11 +418,16 @@ public class SutraActivity extends AppCompatActivity {
                 a = random.nextInt(20) + 10;
                 b = random.nextInt(20) + 10;
                 if (a == b) b++;
-                c = random.nextInt(100) + 50;
-                d = random.nextInt(100) + 50;
+                
+                // Pick integer roots first to ensure integer solutions
+                int xVal = random.nextInt(9) + 1;
+                int yVal = random.nextInt(9) + 1;
+                
+                c = a * xVal + b * yVal;
+                d = b * xVal + a * yVal;
+                
                 maxSteps = isDemo ? 3 : 1;
-                // correctAnswer not used directly as it's a multi-step equation solver
-                correctAnswer = ((c + d) / (a + b) + (c - d) / (a - b)) / 2; // solving for x
+                correctAnswer = xVal; // target x
                 break;
             case 8: // Puranapuranabhyam (Completion of 10s)
                 a = (random.nextInt(8) + 1) * 10 + (random.nextInt(4) + 5);
@@ -399,24 +455,29 @@ public class SutraActivity extends AppCompatActivity {
                 b = random.nextInt(5) + 6;
                 // Question: x² + (a+b)x + ab
                 maxSteps = isDemo ? 3 : 1;
-                correctAnswer = a + b;
+                correctAnswer = (1 + a) * (1 + b); // Target is Sc of total
                 break;
-            case 12: // Shesanyankena Charamena
-                a = (random.nextInt(9) + 1) * 10 + 9; // ends in 9
-                b = random.nextInt(5) + 2;
-                maxSteps = isDemo ? 2 : 1;
-                correctAnswer = a * b;
+            case 12: // Shesanyankena Charamena (Special Division)
+                // Divisor ends in 9, e.g., 19, 29
+                b = (random.nextInt(3) + 1) * 10 + 9;
+                // Simple case: finding the first few decimal digits of 1/b
+                a = 1; 
+                maxSteps = isDemo ? 3 : 1;
+                // For simplicity in this app, we'll use it to find the first decimal digit
+                correctAnswer = (10 / ((b + 1) / 10)); 
                 break;
             case 13: // Sopantyadvayamantyam
                 a = random.nextInt(10) + 1;
-                b = random.nextInt(10) + 11; // to avoid divide by zero if used in steps
+                b = random.nextInt(10) + 11;
+                // Ensure a + b is even for integer result
+                if ((a + b) % 2 != 0) b++;
                 maxSteps = isDemo ? 2 : 1;
                 correctAnswer = -(a + b) / 2;
                 break;
             case 14: // Ekanyunena (x99)
                 a = random.nextInt(89) + 10;
                 b = 99;
-                maxSteps = isDemo ? 2 : 1;
+                maxSteps = isDemo ? 3 : 1;
                 correctAnswer = a * b;
                 break;
             case 15: // Gunakasamuccayah (Verification)
@@ -425,11 +486,12 @@ public class SutraActivity extends AppCompatActivity {
                 maxSteps = isDemo ? 2 : 1;
                 correctAnswer = a * b;
                 break;
-            case 16: // Gunita Samuccayah (Verification of factors)
-                a = random.nextInt(5) + 1;
-                b = random.nextInt(5) + 1;
-                maxSteps = isDemo ? 2 : 1;
-                correctAnswer = (1 + a) * (1 + b);
+            case 16: // Gunita Samuccayah (Verification of polynomial factors)
+                a = random.nextInt(4) + 1; // factor 1: (x + a)
+                b = random.nextInt(4) + 1; // factor 2: (x + b)
+                // Question: Verify (x+a)(x+b) = x² + (a+b)x + ab
+                maxSteps = isDemo ? 3 : 1;
+                correctAnswer = (1 + a) * (1 + b); // Target is Sc of the expression
                 break;
             default:
                 a = random.nextInt(20) + 5;
@@ -538,6 +600,12 @@ public class SutraActivity extends AppCompatActivity {
                         "3. Multiply and Add diagonally to find Quotient and Remainder.\n" +
                         "Example: " + a + " ÷ " + b;
                 break;
+            case 14:
+                demoText += "Ekanyunena Purvena (Multiplication by 99)\n" +
+                        "1. Left Part: " + a + " - 1 = " + (a - 1) + "\n" +
+                        "2. Right Part: 99 - " + (a - 1) + " = " + (99 - (a - 1)) + "\n" +
+                        "Combine: " + (a - 1) + " | " + (99 - (a - 1)) + " = " + (a * b);
+                break;
             default:
                 demoText += "Vedic Method for Sutra " + sutraNumber + "\nProblem: " + a + (a == b ? "²" : " × " + b) + " = " + correctAnswer;
         }
@@ -601,10 +669,51 @@ public class SutraActivity extends AppCompatActivity {
             questionText.setTextSize(40);
             questionText.setTextColor(textColor);
             questionContainer.addView(questionText);
-        } else if (sutraNumber == 4) {
+        } else if (sutraNumber == 8) {
             questionText.setVisibility(View.VISIBLE);
-            questionText.setText(a + " ÷ " + b);
+            questionText.setText(a + " + " + b);
             questionText.setTextSize(40);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 9) {
+            questionText.setVisibility(View.VISIBLE);
+            // Show quadratic equation: x² + (a+b)x + (ab) = 0
+            questionText.setText(String.format(Locale.getDefault(), "x² + %dx + %d = 0", (a+b), (a*b)));
+            questionText.setTextSize(32);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 11) {
+            questionText.setVisibility(View.VISIBLE);
+            // Show verification: (x+a)(x+b) = x² + (a+b)x + ab
+            String expression = String.format(Locale.getDefault(), "(x+%d)(x+%d) = x² + %dx + %d", a, b, (a+b), (a*b));
+            questionText.setText(expression);
+            questionText.setTextSize(24);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 12) {
+            questionText.setVisibility(View.VISIBLE);
+            questionText.setText(String.format(Locale.getDefault(), "Find 1 ÷ %d (Decimal form)", b));
+            questionText.setTextSize(32);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 13) {
+            questionText.setVisibility(View.VISIBLE);
+            questionText.setText(String.format(Locale.getDefault(), "1/(x+%d) + 1/(x+%d) = 0", a, b));
+            questionText.setTextSize(24);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 14) {
+            questionText.setVisibility(View.VISIBLE);
+            questionText.setText(a + " × " + b);
+            questionText.setTextSize(40);
+            questionText.setTextColor(textColor);
+            questionContainer.addView(questionText);
+        } else if (sutraNumber == 16) {
+            questionText.setVisibility(View.VISIBLE);
+            // Show polynomial: (x+a)(x+b) = x² + (a+b)x + ab
+            String expr = String.format(Locale.getDefault(), "(x+%d)(x+%d) = x² + %dx + %d", a, b, (a+b), (a*b));
+            questionText.setText(expr);
+            questionText.setTextSize(22);
             questionText.setTextColor(textColor);
             questionContainer.addView(questionText);
         } else {
@@ -763,38 +872,45 @@ public class SutraActivity extends AppCompatActivity {
                 break;
             case 9: // Chalana
                 if (currentStep == 0) {
-                    hintText.setText("Factorize x² + " + (a + b) + "x + " + (a * b) + ". Sum of roots is?");
-                    intermediateTarget = a + b;
+                    hintText.setText(String.format(Locale.getDefault(), "Factorize: Look for two numbers that add to %d and multiply to %d. Larger number?", (a+b), (a*b)));
+                    intermediateTarget = Math.max(a, b);
                 } else {
-                    hintText.setText("If (x+" + a + ")(x+" + b + ") = 0, one root is -" + b + ", other is?");
-                    intermediateTarget = -a;
+                    hintText.setText(String.format(Locale.getDefault(), "Since (x+%d)(x+%d) = 0, find the root other than -%d.", a, b, Math.max(a,b)));
+                    intermediateTarget = -Math.min(a, b);
                 }
                 break;
             case 11: // Vyashtisamanstih
                 if (currentStep == 0) {
-                    hintText.setText("Find sum of coefficients in (x + " + a + ")(x + " + b + ")");
-                    intermediateTarget = (1+a)*(1+b);
+                    hintText.setText(String.format(Locale.getDefault(), "Step 1: Find the Sum of Coefficients (Sc) for the factor (x+%d). (Set x=1)", a));
+                    intermediateTarget = 1 + a;
+                } else if (currentStep == 1) {
+                    hintText.setText(String.format(Locale.getDefault(), "Step 2: Find the Sc for the second factor (x+%d). (Set x=1)", b));
+                    intermediateTarget = 1 + b;
                 } else {
-                    hintText.setText("What is the constant term?");
-                    intermediateTarget = a * b;
+                    hintText.setText("Step 3: What is the Sc of the total expression x² + " + (a+b) + "x + " + (a*b) + "?");
+                    intermediateTarget = 1 + (a + b) + (a * b);
                 }
                 break;
             case 12: // Shesanyankena
+                int auxiliaryDivisor = (b + 1) / 10;
                 if (currentStep == 0) {
-                    hintText.setText("Step 1: Multiply units " + (a % 10) + " × " + b);
-                    intermediateTarget = (a % 10) * b;
+                    hintText.setText(String.format(Locale.getDefault(), "Step 1: For divisor %d, what is the auxiliary divisor? (One more than the first digit)", b));
+                    intermediateTarget = auxiliaryDivisor;
+                } else if (currentStep == 1) {
+                    hintText.setText(String.format(Locale.getDefault(), "Step 2: Divide 10 (1 carried) by %d. What is the quotient?", auxiliaryDivisor));
+                    intermediateTarget = 10 / auxiliaryDivisor;
                 } else {
-                    hintText.setText("Step 2: Complete the multiplication");
-                    intermediateTarget = correctAnswer;
+                    hintText.setText("Step 3: This quotient becomes the next digit. What is the remainder of 10 / " + auxiliaryDivisor + "?");
+                    intermediateTarget = 10 % auxiliaryDivisor;
                 }
                 break;
             case 13: // Sopantyadvayamantyam
                 if (currentStep == 0) {
-                    hintText.setText("Solve for x: 1/(x+" + a + ") + 1/(x+" + b + ") = 0. Find x+(" + (a+b)/2.0 + ")");
-                    intermediateTarget = 0;
+                    hintText.setText(String.format(Locale.getDefault(), "Step 1: Find the sum of the constants (%d + %d).", a, b));
+                    intermediateTarget = a + b;
                 } else {
-                    hintText.setText("Final value of x?");
-                    intermediateTarget = -(a+b)/2;
+                    hintText.setText(String.format(Locale.getDefault(), "Step 2: The sum of denominators is zero: 2x + %d = 0. Find x.", (a + b)));
+                    intermediateTarget = -(a + b) / 2;
                 }
                 break;
             case 10: // Yavadunam
@@ -812,11 +928,12 @@ public class SutraActivity extends AppCompatActivity {
                 break;
             case 14: // Ekanyunena
                 if (currentStep == 0) {
-                    hintText.setText("Step 1: Subtract 1 from " + a);
+                    hintText.setText(String.format(Locale.getDefault(), "Step 1 (Left Part): Subtract 1 from %d.", a));
                     intermediateTarget = a - 1;
                 } else if (currentStep == 1) {
-                    hintText.setText("Step 2: Find the '99's complement' of " + (a-1) + " (99 - " + (a-1) + ")");
-                    intermediateTarget = 99 - (a - 1);
+                    int leftPart = a - 1;
+                    hintText.setText(String.format(Locale.getDefault(), "Step 2 (Right Part): Find the complement of %d (99 - %d).", leftPart, leftPart));
+                    intermediateTarget = 99 - leftPart;
                 } else {
                     hintText.setText("Step 3: Combine parts. Final Answer?");
                     intermediateTarget = correctAnswer;
@@ -833,13 +950,19 @@ public class SutraActivity extends AppCompatActivity {
                     intermediateTarget = getDigitSum(dsA * dsB);
                 }
                 break;
-            case 16: // Gunita Samuccayah (Verification of factors)
+            case 16: // Gunita Samuccayah (Verification of polynomial factors)
+                int sc1 = 1 + a;
+                int sc2 = 1 + b;
+                int totalSc = 1 + (a + b) + (a * b);
                 if (currentStep == 0) {
-                    hintText.setText("Verification: Let x=1. What is the sum of coefficients in (x+" + a + ")(x+" + b + ")?");
-                    intermediateTarget = (1+a)*(1+b);
+                    hintText.setText(String.format(Locale.getDefault(), "Step 1: Find Sum of Coefficients (Sc) for (x + %d). (Let x=1)", a));
+                    intermediateTarget = sc1;
+                } else if (currentStep == 1) {
+                    hintText.setText(String.format(Locale.getDefault(), "Step 2: Find Sc for (x + %d). (Let x=1)", b));
+                    intermediateTarget = sc2;
                 } else {
-                    hintText.setText("What is the digit sum of the final quadratic expression at x=1?");
-                    intermediateTarget = getDigitSum((1+a)*(1+b));
+                    hintText.setText(String.format(Locale.getDefault(), "Step 3: Sc(Product) = Sc(f1) × Sc(f2) = %d × %d. What is the total Sc?", sc1, sc2));
+                    intermediateTarget = totalSc;
                 }
                 break;
             default:
