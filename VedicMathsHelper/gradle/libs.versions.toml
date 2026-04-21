@@ -7,6 +7,7 @@ appcompat = "1.7.1"
 material = "1.13.0"
 activity = "1.12.3"
 constraintlayout = "2.2.1"
+konfetti = "2.0.4"
 
 mlkit-text-recognition = "16.0.1"
 camerax = "1.4.1"
@@ -25,6 +26,7 @@ camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "
 camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
 camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
 camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+konfetti = { group = "nl.dionsegijn", name = "konfetti-xml", version.ref = "konfetti" }
 guava = { group = "com.google.guava", name = "guava", version = "33.0.0-android" }
 
 [plugins]

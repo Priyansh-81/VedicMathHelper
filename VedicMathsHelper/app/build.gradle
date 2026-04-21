@@ -49,6 +49,8 @@ dependencies {
     implementation libs.camera.lifecycle
     implementation libs.camera.view
 
+    implementation libs.konfetti
+
     // Guava is often needed for ListenableFuture in CameraX
     implementation libs.guava
 }

@@ -11,138 +11,213 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/sun_rays_overlay"
-        android:alpha="0.2" />
+        android:alpha="0.15" />
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <LinearLayout
+        <!-- Header -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
-            android:gravity="center_horizontal">
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageButton
+                android:id="@+id/demoBtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_help"
+                app:tint="@color/temple_maroon"
+                android:contentDescription="Sutra Demo" />
 
             <TextView
                 android:id="@+id/sutraTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:text="Sutra Name"
                 android:fontFamily="@font/samarkan"
-                android:textSize="32sp"
-                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textColor="@color/temple_maroon"
                 android:gravity="center"
-                android:layout_marginTop="20dp"/>
+                android:layout_toEndOf="@id/demoBtn"
+                android:layout_toStartOf="@id/infoBtn" />
+
+            <ImageButton
+                android:id="@+id/infoBtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_menu_info_details"
+                app:tint="@color/temple_maroon"
+                android:contentDescription="Sutra Instructions" />
+        </RelativeLayout>
+
+        <!-- Progress Section -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="24dp">
 
             <ProgressBar
                 android:id="@+id/levelProgressBar"
                 style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                android:layout_width="160dp"
-                android:layout_height="8dp"
-                android:layout_marginTop="12dp"
-                android:progressDrawable="@drawable/pill_saffron"
-                android:progress="0"
+                android:layout_width="200dp"
+                android:layout_height="6dp"
+                android:progressDrawable="@drawable/progress_bar_saffron"
+                android:progress="30"
                 android:max="100"/>
 
             <TextView
                 android:id="@+id/progressText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0% complete"
+                android:text="30% Complete"
                 android:textSize="12sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textColor="@color/text_secondary"
-                android:layout_marginTop="4dp"/>
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#88000000"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
 
-            <!-- Question Card -->
-            <com.google.android.material.card.MaterialCardView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#CCFFFFFF"
-                app:strokeWidth="0dp">
+                android:orientation="vertical"
+                android:gravity="center">
 
-                <LinearLayout
+                <!-- Main Card -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="32dp"
-                    android:gravity="center">
+                    app:cardCornerRadius="32dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="#F2FFFFFF"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#1A000000">
 
-                    <TextView
-                        android:id="@+id/questionText"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="23 × 14"
-                        android:textSize="40sp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:textColor="@color/black" />
+                        android:orientation="vertical"
+                        android:padding="32dp"
+                        android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/hintText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Multiply vertically"
-                        android:textSize="16sp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:textColor="#66000000"
-                        android:layout_marginTop="8dp"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                        <LinearLayout
+                            android:id="@+id/questionContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:minHeight="140dp">
 
-            <TextView
-                android:id="@+id/solutionText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Example text goes here"
-                android:textSize="18sp"
-                android:fontFamily="@font/poppins_medium"
-                android:textColor="@color/black"
-                android:layout_marginTop="24dp"
-                android:gravity="center"/>
+                            <TextView
+                                android:id="@+id/questionText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="45 × 45"
+                                android:textSize="48sp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:textColor="@color/black" />
+                        </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/hintText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Multiply the first digit by 'one more than itself'..."
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:textColor="#99000000"
+                            android:gravity="center"
+                            android:layout_marginTop="16dp"
+                            android:lineSpacingExtra="2dp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/solutionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Success Feedback"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!-- Interaction Area -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/answerInput"
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:hint="Enter answer"
-                android:inputType="number"
+                android:layout_height="68dp"
+                android:hint="Enter Result"
+                android:inputType="numberSigned"
+                android:digits="0123456789-"
                 android:background="@drawable/input_bg"
-                android:paddingHorizontal="20dp"
+                android:paddingHorizontal="24dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:gravity="center"
+                android:elevation="2dp"
                 android:layout_marginBottom="16dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/checkBtn"
-                style="@style/AccentButton"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:text="Check Answer"
-                android:layout_marginBottom="12dp"/>
+                android:text="Check Step"
+                android:backgroundTint="@color/temple_maroon"
+                app:cornerRadius="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:elevation="4dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/nextBtn"
-                style="@style/AccentButton"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                android:text="Start Practice"
-                android:layout_marginBottom="24dp"/>
-
+                android:text="Next Problem"
+                android:backgroundTint="@color/temple_maroon"
+                app:cornerRadius="20dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="18sp"
+                android:elevation="4dp"
+                android:visibility="gone"/>
         </LinearLayout>
-    </ScrollView>
+
+    </LinearLayout>
+
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </FrameLayout>

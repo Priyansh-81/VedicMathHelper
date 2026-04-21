@@ -250,8 +250,15 @@ public class CareerActivity extends AppCompatActivity {
             btn.setRotation(-currentRotation);
         }
 
-        sutraTitle.setText("Sutra " + (index + 1));
-        sutraDesc.setText(getSutraDescription(index + 1));
+        String fullDesc = getSutraDescription(index + 1);
+        String[] parts = fullDesc.split("\n", 2);
+        
+        sutraTitle.setText(parts[0]);
+        if (parts.length > 1) {
+            sutraDesc.setText(parts[1]);
+        } else {
+            sutraDesc.setText("Ancient Vedic Math Technique");
+        }
 
         int displayProgress = 0;
         if (index + 1 < unlockedTill) {
@@ -266,11 +273,23 @@ public class CareerActivity extends AppCompatActivity {
 
     private String getSutraDescription(int id) {
         switch (id) {
-            case 1: return "Ekadhikena Purvena\n(Squares ending in 5)";
-            case 2: return "Nikhilam Navatashcaramam Dashatah\n(Numbers near base 10/100)";
-            case 3: return "Urdhva-Tiryagbhyam\n(General Multiplication)";
-            case 14: return "Ekanyunena Purvena\n(Multiplication by 9, 99, 999...)";
-            default: return "Ancient Vedic Math Technique";
+            case 1: return "Ekadhikena Purvena\nBy one more than the previous one. Used for squares ending in 5.";
+            case 2: return "Nikhilam Navatashcaramam Dashatah\nAll from 9 and the last from 10. Efficient for multiplication near bases.";
+            case 3: return "Urdhva-Tiryagbhyam\nVertically and crosswise. The general formula for multiplication.";
+            case 4: return "Paravartya Yojayet\nTranspose and apply. Used for division and linear equations.";
+            case 5: return "Shunyam Saamyasamuccaye\nWhen the sum is the same, that sum is zero. Solve specific equations quickly.";
+            case 6: return "Anurupyena\nProportionately. Squaring numbers near a sub-base.";
+            case 7: return "Sankalana-Vyavakalanabhyam\nBy addition and by subtraction. Solve simultaneous linear equations.";
+            case 8: return "Puranapuranabhyam\nBy completion or non-completion. Useful for solving quadratics.";
+            case 9: return "Chalana-Kalanabhyam\nDifferences and Similarities. Used for factoring quadratics.";
+            case 10: return "Yavadunam\nWhatever the extent of its deficiency. Squaring near base numbers.";
+            case 11: return "Vyashtisamanstih\nPart and Whole. Advanced factorization of polynomials.";
+            case 12: return "Shesanyankena Charamena\nThe remainders by the last digit. Division by numbers ending in 9.";
+            case 13: return "Sopantyadvayamantyam\nThe ultimate and twice the penultimate. Solve specific algebraic forms.";
+            case 14: return "Ekanyunena Purvena\nBy one less than the previous one. Multiply numbers by 9, 99, 999 etc.";
+            case 15: return "Gunakasamuccayah\nThe product of the sum of coefficients. Verification of multiplication.";
+            case 16: return "Gunita Samuccayah\nThe sum of the coefficients in the product. Verification of factors.";
+            default: return "Ancient Vedic Math Technique\nMaster this sutra to unlock the next challenge.";
         }
     }
 

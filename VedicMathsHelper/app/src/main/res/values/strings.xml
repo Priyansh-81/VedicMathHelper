@@ -1,3 +1,57 @@
 <resources>
     <string name="app_name">VedicMathTutor</string>
+    <string name="sutra_name_placeholder">Sutra Name</string>
+    <string name="progress_zero">0% complete</string>
+    <string name="question_placeholder">23 × 14</string>
+    <string name="hint_placeholder">Multiply vertically</string>
+    <string name="example_text_placeholder">Example text goes here</string>
+    <string name="enter_answer">Enter answer</string>
+    <string name="check_answer">Check Answer</string>
+    <string name="start_practice">Start Practice</string>
+    <string name="next_problem">Next Problem</string>
+    <string name="demo_problem_step">Demo Problem %1$d of %2$d</string>
+    <string name="correct_next_step">✅ Correct! Now for the next step.</string>
+    <string name="brilliant_final_answer">✨ Brilliant! Final Answer Correct.</string>
+    <string name="try_again_hint">❌ Try again! Focus on the hint.</string>
+    <string name="invalid_number">Please enter a valid number</string>
+    <string name="sutra_mastered">Sutra Mastered! +50 XP</string>
+    <string name="great_job">Great job! +10 XP</string>
+
+    <!-- Tutorial Strings -->
+    <string name="tutorial_welcome_title">Namaste, Scholar!</string>
+    <string name="tutorial_welcome_msg">Welcome to the Vedic Path. I will guide you through each Sutra step-by-step. Solve each part to master the complete technique!</string>
+    <string name="tutorial_stepwise_title">Stepwise Learning</string>
+    <string name="tutorial_stepwise_msg">Vedic math is easier when broken down. We\'ll solve big problems in small, simple steps.</string>
+    <string name="tutorial_demo_title">The Demo Mode</string>
+    <string name="tutorial_demo_msg">The first few problems are Demos. I\'ll give you hints for every step to get you started!</string>
+    <string name="tutorial_ready_title">Ready?</string>
+    <string name="tutorial_ready_msg">Enter the result of each step in the box below. Let\'s begin!</string>
+    <string name="tutorial_btn_next">Next</string>
+    <string name="tutorial_btn_start">Start</string>
+
+    <!-- Dialog Strings -->
+    <string name="dialog_got_it">Got it</string>
+    <string name="dialog_lets_practice">Let\'s Practice</string>
+    <string name="quick_demo_prefix">Quick Demo: %1$s</string>
+
+    <!-- Sutra 4 Step Strings -->
+    <string name="sutra4_intro">Sutra 4 (Paravartya) uses \'Transpose and Apply\'.\nFor divisor %1$d (Base 10), what is the transposed digit (surplus with opposite sign)?</string>
+    <string name="sutra4_step1">Step 1: The first digit of the quotient is simply the first digit of the dividend (%1$d). Enter %1$d</string>
+    <string name="sutra4_step2">Step 2: Multiply the quotient digit (%1$d) by the transposed digit (%2$d) and add to the next digit (%3$d).\n(%1$d × %2$d) + %3$d = ?</string>
+    <string name="sutra4_step3">Step 3: This result (%1$d) is our next quotient digit. Multiply it by %2$d and add to the last digit (%3$d) to find the remainder.\n(%1$d × %2$d) + %3$d = ?</string>
+    <string name="sutra4_final">Final Step: The quotient digits are %1$d and %2$d.\nWhat is the final Quotient?</string>
+    <string name="negative_hint">(Note: Result may be negative. Use \'-\' sign if needed)</string>
+
+    <!-- Sutra 10 Strings -->
+    <string name="sutra10_step1">Step 1: Find the deficiency from 100. Subtract it from the number itself (%1$d - %2$d). Result?</string>
+    <string name="sutra10_step2">Step 2: Square the deficiency (%1$d²). Result?</string>
+    <string name="sutra10_step3">Step 3: Append the squared deficiency to the first result. (If square is single digit, add a leading zero). Final Answer?</string>
+
+    <!-- Sutra 15 Strings -->
+    <string name="sutra15_step1">Verification: Calculate the Digit Sum of %1$d (Add digits until a single digit remains).</string>
+    <string name="sutra15_step2">Multiply the digit sums of both numbers. What is the Digit Sum of the result?</string>
+
+    <!-- Sutra 8 Strings -->
+    <string name="sutra8_step1">Completion: How much does %1$d need to reach the next multiple of 10 (%2$d)?</string>
+    <string name="sutra8_step2">Subtract this from %1$d and add it to %2$d. Result?</string>
 </resources>

@@ -168,20 +168,23 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void startBreathing(FrameLayout view) {
+        if (view == null) return;
         view.animate()
                 .alpha(0.97f)
                 .setDuration(4000)
-                .withEndAction(() ->
-                        view.animate()
-                                .alpha(1f)
-                                .setDuration(4000)
-                                .withEndAction(() -> startBreathing(view))
-                                .start()
-                )
+                .withEndAction(() -> {
+                    if (view == null) return;
+                    view.animate()
+                            .alpha(1f)
+                            .setDuration(4000)
+                            .withEndAction(() -> startBreathing(view))
+                            .start();
+                })
                 .start();
     }
 
     private void startSunAnimation() {
+        if (sunRays == null) return;
         sunRays.setTranslationX(-80f);
 
         sunRays.animate()

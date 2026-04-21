@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_pastel">#FAF8F4</color>
     <color name="saffron">#F4A261</color>
+    <color name="deep_saffron">#E67E22</color>
     <color name="soft_saffron">#FFE1B5</color>
     <color name="soft_green">#8BCF9B</color>
     <color name="muted_red">#D9776C</color>
