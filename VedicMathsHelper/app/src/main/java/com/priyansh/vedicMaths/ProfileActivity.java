@@ -65,9 +65,14 @@ public class ProfileActivity extends AppCompatActivity {
                 AppSettings.setHapticsEnabled(this, isChecked)
         );
 
-        musicSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
-                AppSettings.setMusicEnabled(this, isChecked)
-        );
+        musicSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            AppSettings.setMusicEnabled(this, isChecked);
+            if (isChecked) {
+                SoundManager.startBackgroundMusic(this);
+            } else {
+                SoundManager.stopBackgroundMusic();
+            }
+        });
 
         soundSwitch.setOnCheckedChangeListener((buttonView, isChecked) ->
                 AppSettings.setSoundEnabled(this, isChecked)
@@ -209,6 +214,18 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SoundManager.startBackgroundMusic(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SoundManager.stopBackgroundMusic();
     }
 
     private void performHaptic(View view) {

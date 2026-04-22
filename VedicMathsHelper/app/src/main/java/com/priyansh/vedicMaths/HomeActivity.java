@@ -167,6 +167,18 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SoundManager.startBackgroundMusic(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SoundManager.stopBackgroundMusic();
+    }
+
     private void startBreathing(FrameLayout view) {
         if (view == null) return;
         view.animate()

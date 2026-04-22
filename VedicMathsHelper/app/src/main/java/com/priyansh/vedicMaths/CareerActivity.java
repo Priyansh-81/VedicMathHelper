@@ -86,6 +86,18 @@ public class CareerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        SoundManager.startBackgroundMusic(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SoundManager.stopBackgroundMusic();
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         startListeningProgress();
@@ -122,7 +134,7 @@ public class CareerActivity extends AppCompatActivity {
                             unlockedTill = sutraObj.intValue();
                         }
 
-                        if (unlockedTill > 16) unlockedTill = 16;
+                        if (unlockedTill > 17) unlockedTill = 17;
                         
                         Long progObj = doc.getLong("levelProgress");
                         currentLevelProgress = (progObj != null) ? progObj.intValue() : 0;
@@ -158,7 +170,7 @@ public class CareerActivity extends AppCompatActivity {
                     } else {
                         unlockedTill = sutraObj.intValue();
                     }
-                    if (unlockedTill > 16) unlockedTill = 16;
+                    if (unlockedTill > 17) unlockedTill = 17;
                     updateSelection(selectedIndex);
                 });
     }

@@ -76,7 +76,21 @@ public class SutraActivity extends AppCompatActivity {
         loadInitialProgress();
         startSutraFlow();
         checkFirstTimeTutorial();
+        setupButtons();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SoundManager.stopBackgroundMusic();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    private void setupButtons() {
         checkBtn.setOnClickListener(v -> {
             performHaptic(v);
             checkAnswer();
@@ -996,7 +1010,7 @@ public class SutraActivity extends AppCompatActivity {
                     updateUserProgress();
                 }
             } else {
-                solutionText.setText("❌ Try again! Focus on the hint.");
+                solutionText.setText(" Try again! Focus on the hint.");
                 solutionText.setTextColor(getResources().getColor(android.R.color.holo_red_dark));
             }
         } catch (NumberFormatException e) {

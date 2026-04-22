@@ -2,6 +2,7 @@ package com.priyansh.vedicMaths;
 
 import android.content.Context;
 import android.media.AudioAttributes;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 
 public class SoundManager {
@@ -9,22 +10,46 @@ public class SoundManager {
     private static SoundPool soundPool;
     private static int dialTickSound;
     private static int buttonClickSound;
+    private static MediaPlayer bgPlayer;
 
     public static void init(Context context) {
-        if (soundPool != null) return;
+        if (soundPool == null) {
+            AudioAttributes attributes = new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .build();
 
-        AudioAttributes attributes = new AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build();
+            soundPool = new SoundPool.Builder()
+                    .setMaxStreams(5)
+                    .setAudioAttributes(attributes)
+                    .build();
 
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(5)
-                .setAudioAttributes(attributes)
-                .build();
+            dialTickSound = soundPool.load(context, R.raw.dial_tick_short, 1);
+            buttonClickSound = soundPool.load(context, R.raw.button_click, 1);
+        }
 
-        dialTickSound = soundPool.load(context, R.raw.dial_tick_short, 1);
-        buttonClickSound = soundPool.load(context, R.raw.button_click, 1);
+        if (bgPlayer == null && AppSettings.isMusicEnabled(context)) {
+            bgPlayer = MediaPlayer.create(context, R.raw.bgm);
+            bgPlayer.setLooping(true);
+            bgPlayer.setVolume(0.2f, 0.2f);
+        }
+    }
+
+    public static void startBackgroundMusic(Context context) {
+        if (!AppSettings.isMusicEnabled(context)) {
+            stopBackgroundMusic();
+            return;
+        }
+        if (bgPlayer == null) init(context);
+        if (bgPlayer != null && !bgPlayer.isPlaying()) {
+            bgPlayer.start();
+        }
+    }
+
+    public static void stopBackgroundMusic() {
+        if (bgPlayer != null && bgPlayer.isPlaying()) {
+            bgPlayer.pause();
+        }
     }
 
     public static void playDialTick() {
@@ -43,6 +68,10 @@ public class SoundManager {
         if (soundPool != null) {
             soundPool.release();
             soundPool = null;
+        }
+        if (bgPlayer != null) {
+            bgPlayer.release();
+            bgPlayer = null;
         }
     }
 }
